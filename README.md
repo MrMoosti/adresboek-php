@@ -1,2 +1,4 @@
 # adresboek-php
-Adresboek voor PHP (programmeren)
+Adresboek PHP
+
+Met de boys :)
