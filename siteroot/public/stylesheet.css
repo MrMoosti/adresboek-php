@@ -1,13 +1,14 @@
 /* CSS STYLE */
 
 /* Extra small devices (portrait phones, less than 576px) */
+
 /* No media query for `xs` since this is the default in Bootstrap */
 
 html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font: 1em 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font: 1em 'Roboto', sans-serif;
 }
 
 *, *:before, *:after {
@@ -48,12 +49,12 @@ header {
   height: 50px;
   background-color: #2960aa;
   margin: 0 auto;
-  margin-top: -2px;
+  margin-top: -1px;
 }
 
 .fa-angle-down {
   color: white;
-  padding-left: 8px;
+  padding-left: 10px;
 }
 
 ul {
@@ -61,18 +62,19 @@ ul {
   margin: 0 auto;
 }
 
-ul a {
-  display: block;
-}
-
 nav li {
   width: 100%;
 }
 
+.menu {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s linear;
+  }
+
 .slide-down {
   height: 275px;
 }
-
 
 #side-panel h4 {
   font-size: 2.3em;
@@ -82,16 +84,26 @@ nav li {
   margin-left: 30px;
 }
 
-#side-panel > nav > ul > li:nth-child(1) > div > i {
+#side-panel {
+  position: absolute;
+  width: 100%;
+  z-index: 99;
+}
+
+#side-panel>nav>ul>li:nth-child(1)>div>i {
   margin-left: 40px;
 }
 
-#side-panel > nav > ul > li:nth-child(2) > div > i {
+#side-panel>nav>ul>li:nth-child(2)>div>i {
   margin-left: 55px;
 }
 
-#side-panel > nav > ul > li:nth-child(3) > div > i {
+#side-panel>nav>ul>li:nth-child(3)>div>i {
   margin-left: 70px;
+}
+
+#side-panel a {
+  color: inherit;
 }
 
 .sidepanel-button {
@@ -109,12 +121,28 @@ nav li {
   margin-left: 50px;
 }
 
+/* CONTENT */
+
+#content {
+  width: 100%;
+  display: block;
+  height: 30%;
+}
+
+/* DETAIL PANEL */
+
+#detail {
+  width: 100%;
+  height: 70%;
+  display: block;
+  background-color: #EEEEEE;
+}
+
 
 /* MEDIA QUERIES */
-
 /* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {
 
+@media (min-width: 576px) {
   header h2 {
     font-size: 3.7em;
     padding-top: 25px;
@@ -122,20 +150,18 @@ nav li {
 }
 
 /* Medium devices (tablets, 768px and up) */
+
 @media (min-width: 768px) {
-
-    header h2 {
-      padding-top: 15px;
-      font-size: 3.4em;
-    }
-
- }
+  header h2 {
+    padding-top: 15px;
+    font-size: 3.4em;
+  }
+}
 
 /*Large devices (desktops, 992px and up) */
+
 @media (min-width: 992px) {
-
   /* HEADER */
-
   header h2 {
     color: white;
     padding-left: 20px;
@@ -144,7 +170,6 @@ nav li {
     font-size: 2.3em;
     text-align: left;
   }
-
   header {
     top: 0px;
     left: 0px;
@@ -152,70 +177,84 @@ nav li {
     width: 100%;
     height: 10%;
   }
-
   /* SIDE PANEL */
-
   #side-panel {
     background-color: #EEEEEE;
     width: 15%;
     height: 90%;
   }
-
   #side-panel h4 {
     padding: 0;
     margin: 0;
     font-size: 0.8em;
     padding-left: 10px;
     display: inline-block;
-    width: 90px;
+    width: 70px;
     text-align: left;
   }
-
   .fas {
     display: inline-block;
     margin-top: 15px;
-    padding-left: 15px;
+    padding-left: 0px;
     font-size: 1.4em !important;
   }
-
-  #side-panel > nav > ul > li:nth-child(1) > div > i {
+  #side-panel>nav>ul>li:nth-child(1)>div>i {
     margin-left: 0px;
   }
-
-  #side-panel > nav > ul > li:nth-child(2) > div > i {
+  #side-panel>nav>ul>li:nth-child(2)>div>i {
     margin-left: 0px;
   }
-
-  #side-panel > nav > ul > li:nth-child(3) > div > i {
+  #side-panel>nav>ul>li:nth-child(3)>div>i {
     margin-left: 0px;
   }
-
   .sidepanel-button {
     background-color: #EEEEEE;
     height: 55px;
   }
-
   #drop-down {
     width: 0;
     height: 0;
   }
-
   #side-panel {
     display: inline-block;
   }
-
-  section {
-    display: inline-block;
-    top: 0;
+  #content {
+    position: absolute;
+    width: 65%;
+  }
+  #side-panel {
+    position: static;
+    width: 15%;
+    z-index: 1;
+  }
+  #drop-down > i {
+    font-size: 0em !important;
   }
 
+  /* CONTENT */
+
+  #content {
+    position: absolute;
+    width: 65%;
+    display: inline-block;
+  }
+
+  /* DETAIL PANEL */
+
+  #detail {
+    width: 20%;
+    height: 90%;
+    display: inline-block;
+    position: absolute;
+    margin-left: 65%;
+    background-color: #EEEEEE;
+  }
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
+
 @media (min-width: 1200px) {
-
   /* HEADER */
-
   header h2 {
     color: white;
     padding-left: 20px;
@@ -224,7 +263,6 @@ nav li {
     font-size: 3em;
     text-align: left;
   }
-
   header {
     top: 0px;
     left: 0px;
@@ -232,52 +270,70 @@ nav li {
     width: 100%;
     height: 10%;
   }
-
   /* SIDE PANEL */
-
   #side-panel {
     background-color: #EEEEEE;
     width: 15%;
     height: 90%;
+    position: relative;
   }
-
   #side-panel h4 {
     padding: 0;
     margin: 0;
     font-size: 1em;
     padding-left: 10px;
     display: inline-block;
-    width: 90px;
+    width: 85px;
     text-align: left;
   }
-
   .fas {
     display: inline-block;
     margin-top: 15px;
     padding-left: 15px;
     font-size: 1.4em !important;
   }
-
-  #side-panel > nav > ul > li:nth-child(1) > div > i {
+  #side-panel>nav>ul>li:nth-child(1)>div>i {
     margin-left: 0px;
   }
-
-  #side-panel > nav > ul > li:nth-child(2) > div > i {
+  #side-panel>nav>ul>li:nth-child(2)>div>i {
     margin-left: 0px;
   }
-
-  #side-panel > nav > ul > li:nth-child(3) > div > i {
+  #side-panel>nav>ul>li:nth-child(3)>div>i {
     margin-left: 0px;
   }
-
   .sidepanel-button {
     background-color: #EEEEEE;
     height: 55px;
   }
-
   #drop-down {
     width: 0;
     height: 0;
   }
+  #side-panel {
+    position: static;
+    width: 15%;
+    z-index: 1;
+  }
+  #drop-down > i {
+    font-size: 0em !important;
+  }
 
+  /* CONTENT */
+
+  #content {
+    position: absolute;
+    width: 65%;
+    display: inline-block;
+  }
+
+  /* DETAIL PANEL */
+
+  #detail {
+    width: 20%;
+    height: 90%;
+    display: inline-block;
+    position: absolute;
+    margin-left: 65%;
+    background-color: #EEEEEE;
+  }
 }
