@@ -20,11 +20,12 @@ for ($i = 0; $i < $_POST['times']; $i++)
     $json2 = file_get_contents('https://api.namefake.com/');
     $company = json_decode($json2, true)['company'];
     $sql = "INSERT INTO `contactperson`(`username`, `first_name`,
-        `insertion`, `last_name`, `business_name`, `business_place`,
+        `last_name`, `business_name`, `business_place`,
         `email`, `telephone_work`, `telephone_private`, `img_filename`)
          VALUES (
-        '{$user['results'][0]['login']['username']}', '{$user['results'][0]['name']['first']}', '', '{$user['results'][0]['name']['last']}',
-        '{$company}', '{$user['results'][0]['location']['city']}', '{$user['results'][0]['email']}',
+        '{$user['results'][0]['login']['username']}', '{$user['results'][0]['name']['first']}', 
+        '{$user['results'][0]['name']['last']}', '{$company}', 
+        '{$user['results'][0]['location']['city']}', '{$user['results'][0]['email']}',
         '{$user['results'][0]['phone']}', '{$user['results'][0]['cell']}',
         '{$user['results'][0]['picture']['large']}')";
     if ($bd->query($sql) === TRUE) {
