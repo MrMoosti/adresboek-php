@@ -1,3 +1,4 @@
+<?php include ('includes/Contactpersoon.php'); ?>
 <?php include 'layouts/index_header.php';?>
 
     <!-- THIS SECTION CHANGES DEPENDEND ON SQL-QUERY -->
@@ -38,7 +39,35 @@
                 </li>
             </ul>
         </div>
-            <?php include 'includes/listContacts.php'?>
+
+        <div class="listNames">
+            <?php
+
+            $contacts = Contactpersoon::find_all();
+
+            $result = $db->query($contacts);
+
+            if ($result->num_rows > 0) {
+                //adding one row per person
+                while($row = $result->fetch_assoc()) {
+                    echo "<div class=\"section\">";
+                    echo "<img src=\"{$row["img_filename"]}\" />";
+                    echo "<p>{$row["first_name"]}, {$row["last_name"]}</p>";
+                    echo "<p>{$row["zipcode"]}, {$row["business_place"]}</p>";
+                    echo "<p class=\"sectionCompany\">{$row["business_name"]}</p>";
+                    echo "</div><hr />";
+                }
+            }
+            else {
+                echo "  <div class=\"section\">
+          				<img src=\"images/profile_pictures/kim.jpg\">
+          				<p>Kim, Jung Un</p>
+          				<p>7071 KA, Ulft</p>
+          				<p class=\"sectionCompany\">microsoft</p>
+          			    </div><hr></div>";
+            }?>
+        </div>
+
     </section>
 
     <section id="detail">

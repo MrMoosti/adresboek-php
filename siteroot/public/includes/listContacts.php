@@ -8,8 +8,8 @@
         die("Connection failed: " . $db->connect_error);
     }
 
-    $sql = "SELECT `ID`, `username`, `first_name`, `insertion`, `last_name`, 
-            `business_name`, `business_place`, `zipcode`, `email`, `telephone_work`, 
+    $sql = "SELECT `ID`, `username`, `first_name`, `insertion`, `last_name`,
+            `business_name`, `business_place`, `zipcode`, `email`, `telephone_work`,
             `telephone_private`, `img_filename`, `img_size`, `img_type` FROM `contactperson` ";
 
     $result = $db->query($sql);
