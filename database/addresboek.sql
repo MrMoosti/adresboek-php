@@ -1,3 +1,4 @@
+
 -- phpMyAdmin SQL Dump
 -- version 4.8.0
 -- https://www.phpmyadmin.net/
@@ -36,6 +37,7 @@ CREATE TABLE `contactperson` (
   `last_name` varchar(255) COLLATE utf8_bin NOT NULL,
   `business_name` varchar(255) COLLATE utf8_bin NOT NULL,
   `business_place` varchar(255) COLLATE utf8_bin NOT NULL,
+  `zipcode` varchar(255) COLLATE utf8_bin NOT NULL,
   `email` varchar(255) COLLATE utf8_bin NOT NULL,
   `telephone_work` varchar(255) COLLATE utf8_bin NOT NULL,
   `telephone_private` varchar(255) COLLATE utf8_bin NOT NULL,
