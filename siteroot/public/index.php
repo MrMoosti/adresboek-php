@@ -1,58 +1,4 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-
-<head>
-    <meta charset="utf-8" />
-    <title>OnlineAdresboek | Home</title>
-    <link rel="stylesheet" href="stylesheet.css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous" />
-</head>
-
-<body>
-    <header>
-        <h2>OnlineAdresboek</h2>
-    </header>
-
-    <!-- ON EVERY PAGE -->
-    <div id="side-panel">
-        <nav>
-            <ul class="menu">
-                <li>
-                    <a href="#">
-                        <div class="sidepanel-button gebruikers-but">
-                            <h4>Gebruikers</h4>
-                            <i class="fas fa-user fa-2x sidepanel-icons"></i>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <div class="sidepanel-button contacten-but">
-                            <h4>Contacten</h4>
-                            <i class="fas fa-users fa-2x sidepanel-icons"></i>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="login.html">
-                        <div class="sidepanel-button uitloggen-but">
-                            <h4>Uitloggen</h4>
-                            <i class="fas fa-key fa-2x sidepanel-icons"></i>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-
-            <a href="#">
-                <div id="drop-down">
-                    <i class="fas fa-angle-down fa-3x"></i>
-                </div>
-            </a>
-
-        </nav>
-    </div>
-    <!-- ON EVERY PAGE -->
-
+<?php include 'layouts/index_header.php';?>
 
     <!-- THIS SECTION CHANGES DEPENDEND ON SQL-QUERY -->
     <section id="content">
@@ -92,17 +38,41 @@
                 </li>
             </ul>
         </div>
-            <?php include 'listContacts.php';?>
+
+        <div class="listNames">
+            <?php
+            // Create connection
+            $db = new mysqli("localhost", "root", "", "addressbook");
+            // Check connection
+            if ($db->connect_error) {
+                die("Connection failed: " . $db->connect_error);
+            }
+            $sql = "SELECT `ID`, `username`, `first_name`, `insertion`, `last_name`, `business_name`, `business_place`, `zipcode`, `email`, `telephone_work`, `telephone_private`, `img_filename`, `img_size`, `img_type` FROM `contactperson` ";
+            $result = $db->query($sql);
+            if ($result->num_rows > 0) {
+                //adding one row per person
+                while($row = $result->fetch_assoc()) {
+                    echo "<div class=\"section\">";
+                    echo "<img src=\"{$row["img_filename"]}\" />";
+                    echo "<p>{$row["first_name"]}, {$row["last_name"]}</p>";
+                    echo "<p>{$row["zipcode"]}, {$row["business_place"]}</p>";
+                    echo "<p class=\"sectionCompany\">{$row["business_name"]}</p>";
+                    echo "</div><hr />";
+                }
+            }
+            else {
+                echo "  <div class=\"section\">
+  				<img src=\"images/profile_pictures/kim.jpg\">
+  				<p>Kim, Jung Un</p>
+  				<p>7071 KA, Ulft</p>
+  				<p class=\"sectionCompany\">microsoft</p>
+  			    </div><hr></div>";
+            }?>
+        </div>
     </section>
 
     <section id="detail">
         <p>Hi</p>
     </section>
 
-
-    <script src="js/vendor/jquery-3.3.1.min.js"></script>
-    <script src="js/main.js"></script>
-
-</body>
-
-</html>
+<?php include 'layouts/index_footer.php';?>
