@@ -1,0 +1,40 @@
+body {
+	font-family: 'Roboto', sans-serif;
+}
+.sidebar {
+	background-color: #EEEEEE;
+	width: 20%;
+	height: 700px;
+}
+
+.sidebar img {
+	margin-top: 25px;
+	width: 75%;
+    border-radius: 100%;
+    margin-left: 12%;
+}
+
+.sidebar h2 {
+	color: #A6A6A6;
+	font-weight: normal;
+	font-size: 1.7em;
+	text-align: center;
+}
+
+.sidebar p { 
+	color: #A6A6A6;
+}
+
+.paraSide i {
+	margin-right: 15px;
+	margin-left: 20px;
+}
+.deleteChange {
+	float: right;
+	margin-top: 50%;
+}
+
+.deleteChange i {
+	font-size: 1.8em;
+	margin-right: 25px;
+}
