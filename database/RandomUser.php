@@ -38,5 +38,5 @@ for ($i = 0; $i < $_POST['times']; $i++)
     }
 }
 if(!$error) echo "<br>{$_POST["times"]} new records successfully created";
-//ALTER TABLE `contactperson` ADD `zipcode` VARCHAR(255) NOT NULL AFTER `business_place`;
+$db->close;
 ?>
