@@ -192,9 +192,9 @@ nav li {
 /* CONTENT */
 
 #content {
-  width: 65%;
+  width: 100%;
   display: block;
-  height: 75%;
+  height: auto;
   padding-left: 10px;
   padding-top: 10px;
 }
@@ -237,8 +237,8 @@ form.searchForm a {
 .listNames {
 	width: 92%;
   overflow-y: scroll;
-  position: absolute;
-  height: 100%;
+  height: auto;
+  margin-bottom: 25px;
 }
 .section {
 	padding: 1px;
@@ -264,11 +264,6 @@ form.searchForm a {
 	text-transform: uppercase;
 	margin-top: -45px;
 	margin-right: 15%;
-}
-
-
-#content > div.sortNames > ul {
-
 }
 
 #content > div.search > form > a > i {
@@ -369,7 +364,12 @@ form.searchForm a {
   #content {
     position: absolute;
     width: 65%;
+    display: block;
+    height: 75%;
+    padding-left: 10px;
+    padding-top: 10px;
   }
+
   #side-panel {
     position: static;
     width: 15%;
@@ -429,6 +429,28 @@ form.searchForm a {
     display: inline-block;
   }
 
+  .cards > p {
+    text-decoration: none;
+  }
+
+  .listNames {
+    height: 100%;
+    position: absolute;
+    margin: 0;
+  }
+
+  form.searchForm input[type=text] {
+      width: 95%;
+  }
+
+  form.searchForm a {
+    font-size: 1.3em;
+  }
+
+  .bold-sorteren {
+    font-weight: 900;
+  }
+
   /* DETAIL PANEL */
 
   #detail {
@@ -440,6 +462,9 @@ form.searchForm a {
     background-color: #EEEEEE;
   }
 
+  #content > div.search > form > a > i {
+    padding-left: 5px;
+  }
 
 }
 
@@ -516,6 +541,10 @@ form.searchForm a {
     position: absolute;
     width: 65%;
     display: inline-block;
+  }
+
+  form.searchForm a {
+    font-size: 1.8em;
   }
 
   /* DETAIL PANEL */
