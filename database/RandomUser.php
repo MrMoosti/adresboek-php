@@ -1,7 +1,6 @@
 <?php
 // Create connection
 $bd = new mysqli("localhost", "root", "", "addressbook");
-
 // Check connection
 if ($bd->connect_error) {
     die("Connection failed: " . $bd->connect_error);
@@ -9,25 +8,28 @@ if ($bd->connect_error) {
 $error = true;
 for ($i = 0; $i < $_POST['times']; $i++)
 {
-	$json = file_get_contents('https://randomuser.me/api/');
+    $zipCodeLetters = str_split('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+    shuffle($zipCodeLetters);
+    $rand = '';
+    foreach (array_rand($zipCodeLetters, 2) as $k) $rand .= $zipCodeLetters[$k];
+    $json = file_get_contents('https://randomuser.me/api/');
     $user = json_decode($json, true);
     stream_context_set_default(array(
-            'ssl'                => array(
-            'verify_peer'        => FALSE,
-            'verify_peer_name'   => FALSE,
-            'allow_self_signed'  => TRUE
-             )));
+    'ssl'                => array(
+    'verify_peer'        => FALSE,
+    'verify_peer_name'   => FALSE,
+    'allow_self_signed'  => TRUE
+    )));
     $json2 = file_get_contents('https://api.namefake.com/');
     $company = json_decode($json2, true)['company'];
     $sql = "INSERT INTO `contactperson`(`username`, `first_name`,
-        `last_name`, `business_name`, `business_place`,
-        `email`, `telephone_work`, `telephone_private`, `img_filename`)
-         VALUES (
-        '{$user['results'][0]['login']['username']}', '{$user['results'][0]['name']['first']}', 
-        '{$user['results'][0]['name']['last']}', '{$company}', 
-        '{$user['results'][0]['location']['city']}', '{$user['results'][0]['email']}',
-        '{$user['results'][0]['phone']}', '{$user['results'][0]['cell']}',
-        '{$user['results'][0]['picture']['large']}')";
+    `insertion`, `last_name`, `business_name`, `business_place`, `zipcode`,
+    `email`, `telephone_work`, `telephone_private`, `img_filename`)
+    VALUES (
+    '{$user['results'][0]['login']['username']}', '{$user['results'][0]['name']['first']}', '', '{$user['results'][0]['name']['last']}',
+    '{$company}', '{$user['results'][0]['location']['city']}', '{$user['results'][0]['location']['postcode']} {$rand}', '{$user['results'][0]['email']}',
+    '{$user['results'][0]['phone']}', '{$user['results'][0]['cell']}',
+    '{$user['results'][0]['picture']['large']}')";
     if ($bd->query($sql) === TRUE) {
         $error = false;
     } else {
@@ -36,4 +38,5 @@ for ($i = 0; $i < $_POST['times']; $i++)
     }
 }
 if(!$error) echo "<br>{$_POST["times"]} new records successfully created";
+//ALTER TABLE `contactperson` ADD `zipcode` VARCHAR(255) NOT NULL AFTER `business_place`;
 ?>
