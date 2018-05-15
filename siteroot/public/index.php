@@ -38,10 +38,7 @@
                 </li>
             </ul>
         </div>
-
-        <div class="listNames">
             <?php include 'includes/listContacts.php'?>
-        </div>
     </section>
 
     <section id="detail">
