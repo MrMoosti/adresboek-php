@@ -42,11 +42,14 @@
 
         <div class="listNames">
             <?php
-
-            $contacts = Contactpersoon::find_all();
-
-            $result = $db->query($contacts);
-
+            // Create connection
+            $db = new mysqli("localhost", "root", "", "addressbook");
+            // Check connection
+            if ($db->connect_error) {
+                die("Connection failed: " . $db->connect_error);
+            }
+            $sql = "SELECT `ID`, `username`, `first_name`, `insertion`, `last_name`, `business_name`, `business_place`, `zipcode`, `email`, `telephone_work`, `telephone_private`, `img_filename`, `img_size`, `img_type` FROM `contactperson` ";
+            $result = $db->query($sql);
             if ($result->num_rows > 0) {
                 //adding one row per person
                 while($row = $result->fetch_assoc()) {
@@ -60,11 +63,11 @@
             }
             else {
                 echo "  <div class=\"section\">
-          				<img src=\"images/profile_pictures/kim.jpg\">
-          				<p>Kim, Jung Un</p>
-          				<p>7071 KA, Ulft</p>
-          				<p class=\"sectionCompany\">microsoft</p>
-          			    </div><hr></div>";
+  				<img src=\"images/profile_pictures/kim.jpg\">
+  				<p>Kim, Jung Un</p>
+  				<p>7071 KA, Ulft</p>
+  				<p class=\"sectionCompany\">microsoft</p>
+  			    </div><hr></div>";
             }?>
         </div>
 
