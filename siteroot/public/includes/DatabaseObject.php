@@ -18,6 +18,18 @@ class DatabaseObject
         return !empty($result_array) ? array_shift($result_array) : false;
     }
 
+    public static function search($searchq = "", $table_name = "")
+    {
+        global $database;
+        $searchq = preg_replace("#[^0-9a-z]#i", "", $searchq);
+        $sql = "SELECT * FROM ".$table_name." WHERE first_name LIKE '%".$searchq."%'";
+        $sql .= " OR last_name LIKE '%".$searchq."%'";
+        $sql .= " OR business_name LIKE '%".$searchq."%'";
+        $sql .= " OR business_place LIKE '%".$searchq."%' ORDER BY first_name ASC";
+        $result = static::find_by_sql($sql);
+        return $result;
+    }
+
     public static function find_by_sql($sql="")
     {
         global $database;
@@ -35,6 +47,7 @@ class DatabaseObject
         // Could check that $record exists and is an array
         $class_name = get_called_class();
         $object = new $class_name;
+
         // More dynamic, short-form approach:
         foreach ($record as $attribute => $value)
         {
