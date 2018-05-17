@@ -15,8 +15,20 @@ class Contactpersoon extends DatabaseObject
     protected static $db_fields = array('id', 'username', 'first_name', 'insertion', 'last_name', 'business_name', 'business_place', 'zipcode', 'email', 'telephone_work',
                                         'telephone_private', 'img_filename', 'img_size', 'img_type');
 
-    public $id, $username, $first_name, $last_name, $insertion, $business_name, $business_place, 
-           $zipcode, $email, $telephone_work, $telephone_private, $img_filename,  $img_size, $img_type;
+    public $id;
+    public $username;
+    public $first_name;
+    public $last_name;
+    public $insertion;
+    public $business_name;
+    public $business_place;
+    public $zipcode;
+    public $email;
+    public $telephone_work;
+    public $telephone_private;
+    public $img_filename;
+    public $img_size;
+    public $img_type;
 
     private function has_attribute($attribute)
     {

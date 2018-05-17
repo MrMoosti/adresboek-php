@@ -61,14 +61,8 @@
                 echo "<p class=\"sectionCompany\">{$row["business_name"]}</p>";
                 echo "</div><hr />";
             }
-<<<<<<< HEAD
-            //kim jung un laten zien omdat er geen andere contacten zijn gvd
-            else {
-                echo "  <div class=\"section\">
-=======
         } else {
             echo "  <div class=\"section\">
->>>>>>> 91372a06afbf1c12819802c5529c9235c0beaaf3
   				<img src=\"images/profile_pictures/kim.jpg\">
   				<p>Kim, Jung Un</p>
   				<p>7071 KA, Ulft</p>
