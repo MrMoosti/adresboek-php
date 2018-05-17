@@ -1,12 +1,14 @@
 <?php include('includes/Contactpersoon.php'); ?>
 <?php include 'layouts/index_header.php'; ?>
 <?php require_once('includes/ContactPersoon.php'); ?>
+
+
 <!-- THIS SECTION CHANGES DEPENDEND ON SQL-QUERY -->
 <section id="content">
     <div class="search">
-        <form class="searchForm" method="get">
-            <input type="text" name="voornaam" placeholder="Zoek..."/>
-            <a href="#">
+        <form class="searchForm" method="get" id="searchForm">
+            <input type="text" name="voornaam" placeholder="Zoeken"/>
+            <a href="#" onclick="document.getElementById('searchForm').submit()" rel="search">
                 <i class="fa fa-search"></i>
             </a>
         </form>
@@ -42,7 +44,13 @@
 
     <div class="listNames">
         <?php
-        $result = ContactPersoon::find_all();
+        if (isset($_GET['voornaam'])) {
+            $searchResult = $_GET['voornaam'];
+            $result = ContactPersoon::search($searchResult, "contactperson");
+        }
+        else {
+             $result = ContactPersoon::find_all();
+        }
         foreach ($result as $person) {
             echo "<div class=\"section\">";
             echo "<img src=\"{$person->img_filename}\" />";
@@ -50,6 +58,9 @@
             echo "<p>{$person->zipcode}, {$person->business_place}</p>";
             echo "<p class=\"sectionCompany\">{$person->business_name}</p>";
             echo "</div><hr />";
+        }
+        if (empty($result)) {
+           echo "Er zijn geen resultaten gevonden";
         }
         ?>
     </div>
@@ -73,4 +84,4 @@
     </div>
 </section>
 
-<?php include 'layouts/index_footer.php'; ?>
+<?php include 'layouts/index_footer.php';?>
