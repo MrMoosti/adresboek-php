@@ -3,8 +3,9 @@
 
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>OnlineAdresboek | Home</title>
-    <link rel="stylesheet" href="stylesheet.css" />
+    <link rel="stylesheet" href="stylesheets/stylesheet.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous" />
 </head>
 
@@ -45,7 +46,7 @@
 
             <a href="#">
                 <div id="drop-down">
-                    <i class="fas fa-angle-down fa-3x"></i>
+                    <i class="fas fa-angle-down"></i>
                 </div>
             </a>
 
