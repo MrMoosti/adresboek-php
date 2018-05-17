@@ -61,6 +61,7 @@
                     echo "</div><hr />";
                 }
             }
+            //kim jung un laten zien omdat er geen andere contacten zijn gvd
             else {
                 echo "  <div class=\"section\">
   				<img src=\"images/profile_pictures/kim.jpg\">
