@@ -1,6 +1,6 @@
 <?php include('includes/Contactpersoon.php'); ?>
 <?php include 'layouts/index_header.php'; ?>
-
+<?php require_once('includes/Database.php'); ?>
 <!-- THIS SECTION CHANGES DEPENDEND ON SQL-QUERY -->
 <section id="content">
     <div class="search">
@@ -42,15 +42,9 @@
 
     <div class="listNames">
         <?php
-        // Create connection
-        $db = new mysqli("localhost", "root", "", "addressbook");
-        // Check connection
-        if ($db->connect_error) {
-            die("Connection failed: " . $db->connect_error);
-        }
+        global $database;
         $sql = "SELECT `ID`, `username`, `first_name`, `insertion`, `last_name`, `business_name`, `business_place`, `zipcode`, `email`, `telephone_work`, `telephone_private`, `img_filename`, `img_size`, `img_type` FROM `contactperson` ";
-        $result = $db->query($sql);
-
+        $result = $database->query($sql);
         if ($result->num_rows > 0) {
             //adding one row per person
             while ($row = $result->fetch_assoc()) {
