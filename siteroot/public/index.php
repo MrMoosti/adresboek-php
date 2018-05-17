@@ -67,10 +67,10 @@
         <p><i class="fas fa-phone" style="color: black"></i> 0315-18793712</p>
         <p><i class="fas fa-building" style="color: black"></i> Ulft</p>
     </div>
-    <!--<div class="deleteChange">
+    <div class="deleteChange">
         <i class="fas fa-pencil-alt"></i>
         <i class="fas fa-trash"></i>
-    </div>-->
+    </div>
 </section>
 
 <?php include 'layouts/index_footer.php'; ?>
