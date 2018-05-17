@@ -6,11 +6,6 @@ require_once('DatabaseObject.php');
 
 class Contactpersoon extends DatabaseObject
 {
-
-    /* $sql = "SELECT `ID`, `username`, `first_name`, `insertion`, `last_name`,
-            `business_name`, `business_place`, `zipcode`, `email`, `telephone_work`,
-            `telephone_private`, `img_filename`, `img_size`, `img_type` FROM `contactperson` "; */
-
     protected static $table_name = "contactperson";
     protected static $db_fields = array('id', 'username', 'first_name', 'insertion', 'last_name', 'business_name', 'business_place', 'zipcode', 'email', 'telephone_work',
                                         'telephone_private', 'img_filename', 'img_size', 'img_type');

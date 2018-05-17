@@ -9,17 +9,8 @@ class User extends DatabaseObject
     protected static $table_name = "user";
     protected static $db_fields = array('id', 'username', 'first_name', 'insertion', 'last_name', 'telephone', 'password', 'admin', 'img_filename', 'img_size', 'img_type');
 
-    public $id;
-    public $username;
-    public $password;
-    public $first_name;
-    public $last_name;
-    public $insertion;
-    public $telephone;
-    public $admin;
-    public $img_filename;
-    public $img_size;
-    public $img_type;
+    public $id, $username, $password, $first_name, $last_name, $insertion, 
+           $telephone, $admin, $img_filename, $img_size, $img_type;
 
     public function full_name()
     {

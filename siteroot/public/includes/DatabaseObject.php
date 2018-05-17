@@ -35,12 +35,6 @@ class DatabaseObject
         // Could check that $record exists and is an array
         $class_name = get_called_class();
         $object = new $class_name;
-        // $object->id 					= $record['id'];
-        // $object->username 		= $record['username'];
-        // $object->password 		= $record['password'];
-        // $object->first_name 	= $record['first_name'];
-        // $object->last_name 		= $record['last_name'];
-
         // More dynamic, short-form approach:
         foreach ($record as $attribute => $value)
         {
