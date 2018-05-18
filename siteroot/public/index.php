@@ -4,17 +4,13 @@
         {
             redirect_to("login.php");
         }
-?>
-<?php include 'layouts/index_header.php'; ?>
-
-
-
+        include 'layouts/index_header.php'; ?>
 
 <!-- THIS SECTION CHANGES DEPENDEND ON SQL-QUERY -->
 <section id="content">
     <div class="search">
         <form class="searchForm" method="get" id="searchForm">
-            <input type="text" name="voornaam" placeholder="Zoeken"/>
+            <input type="text" name="voornaam" placeholder="Zoeken" />
             <a href="#" onclick="document.getElementById('searchForm').submit()" rel="search">
                 <i class="fa fa-search"></i>
             </a>
@@ -50,30 +46,76 @@
     </div>
 
     <div class="listNames">
-        <?php
-        if (isset($_GET['voornaam'])) {
-            $searchResult = $_GET['voornaam'];
-            $result = ContactPersoon::search($searchResult, "contactperson");
-        }
-        else {
-             $result = ContactPersoon::find_all();
-        }
-        foreach ($result as $person) {
-            echo "<div class=\"section\">";
-            echo "<img src=\"{$person->img_filename}\" />";
-            echo "<p>{$person->first_name}, {$person->last_name}</p>";
-            echo "<p>{$person->zipcode}, {$person->business_place}</p>";
-            echo "<p class=\"sectionCompany\">{$person->business_name}</p>";
-            echo "</div><hr />";
-        }
-        if (empty($result)) {
-           echo "Er zijn geen resultaten gevonden";
-        }
-        ?>
+        <div id="load_data">
+            <script type="text/javascript"></script>
+        </div>
+        <div id="load_data_message"></div>
+        <script>
+            function findGET() {
+                var result = null,
+                    tmp = [];
+                location.search
+                    .substr(1)
+                    .split("&")
+                    .forEach(function (item) {
+                        tmp = item.split("=");
+                        if (tmp[0] === "voornaam") result = decodeURIComponent(tmp[1]);
+                    });
+                return result;
+            }
+            $(document).ready(function () {
+                var limit = 20;
+                var start = 0;
+                var action = 'inactive';
+                function load_data(limit, start, search) {
+                    $.ajax({
+                        url: "CpData.php",
+                        method: "POST",
+                        data: { limit: limit, start: start, search: search },
+                        cache: false,
+                        success: function (data) {
+                            $('#load_data').append(data);
+                            if (data == '') {
+                                $('#load_data_message').html("<button type='button' class='btn btn-info'>No Data Found</button>");
+                                action = 'active';
+                            }
+                            else {
+                                $('#load_data_message').html("<div id='loadingGif'><img src='https://i.gyazo.com/8ee2faef3efa92e0a932eb1a36659cdb.gif'/></div>");
+                                action = "inactive";
+                            }
+                        }
+                    });
+                }
+                if (action == 'inactive' && findGET() == null) {
+                    action = 'active';
+                    load_data(limit, start, null);
+                } else {
+                    action = 'active';
+                    load_data(limit, start, findGET());
+                    window.history.pushState("object or string", "Title", "/adresboek-php/siteroot/public/");
+                }
+                $(".listNames").scroll(function () {
+                    if ($(".listNames").scrollTop() + $(".listNames").height() > $("#load_data").height() && action == 'inactive') {
+                        if (findGET() == null) {
+                            action = 'active';
+                            start = start + limit;
+                            setTimeout(function () {
+                                load_data(limit, start, null);
+                            }, 1000);
+                        } else {
+                            action = 'active';
+                            start = start + limit;
+                            setTimeout(function () {
+                                load_data(limit, start, findGET());
+                            }, 1000);
+                        }
+                    }
+                });
+
+            });
+        </script>
     </div>
-
 </section>
-
 <section id="detail">
     <img src="images/profile_pictures/kim.jpg">
     <h2>Kim, Jung Un</h2>

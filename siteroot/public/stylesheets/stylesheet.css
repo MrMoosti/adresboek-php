@@ -141,6 +141,12 @@ ul {
     margin: 0 auto;
 }
 
+#loadingGif img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 nav li {
     width: 100%;
 }
