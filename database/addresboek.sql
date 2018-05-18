@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `contactperson` (
-  `ID` int(255) NOT NULL,
+  `id` int(255) NOT NULL,
   `username` varchar(255) COLLATE utf8_bin NOT NULL,
   `first_name` varchar(255) COLLATE utf8_bin NOT NULL,
   `insertion` varchar(255) COLLATE utf8_bin NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE `contactperson` (
 --
 
 CREATE TABLE `user` (
-  `ID` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `username` varchar(255) COLLATE utf8_bin NOT NULL,
   `first_name` varchar(255) COLLATE utf8_bin NOT NULL,
   `insertion` varchar(255) COLLATE utf8_bin NOT NULL,
