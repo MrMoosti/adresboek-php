@@ -1,7 +1,45 @@
-<?php include('includes/Contactpersoon.php'); ?>
+<?php require_once("../includes/initialize.php"); ?>
 <?php include 'layouts/index_header.php'; ?>
-<?php require_once('includes/Contactpersoon.php'); ?>
-<?php include('includes/User.php');?>
+
+<!-- ON EVERY PAGE -->
+<div id="side-panel">
+    <nav>
+        <ul class="menu">
+            <li>
+                <a href="gebruikers.php">
+                    <div class="sidepanel-button gebruikers-but">
+                        <h4>Gebruikers</h4>
+                        <i class="fas fa-user fa-2x sidepanel-icons"></i>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="index.php">
+                    <div class="sidepanel-button contacten-but">
+                        <h4>Contacten</h4>
+                        <i class="fas fa-users fa-2x sidepanel-icons"></i>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="logout.php">
+                    <div class="sidepanel-button uitloggen-but">
+                        <h4>Uitloggen</h4>
+                        <i class="fas fa-key fa-2x sidepanel-icons"></i>
+                    </div>
+                </a>
+            </li>
+        </ul>
+
+        <a href="#">
+            <div id="drop-down">
+                <i class="fas fa-angle-down"></i>
+            </div>
+        </a>
+
+    </nav>
+</div>
+<!-- ON EVERY PAGE -->
 
 <!-- THIS SECTION CHANGES DEPENDEND ON SQL-QUERY -->
 <section id="content">
@@ -46,17 +84,24 @@
         <?php
         if (isset($_GET['voornaam'])) {
             $searchResult = $_GET['voornaam'];
-            $result = ContactPersoon::search($searchResult, "contactperson");
+            $result = User::search($searchResult, "user");
         }
         else {
-            $result = ContactPersoon::find_all();
+            $result = User::find_all();
         }
         foreach ($result as $person) {
             echo "<div class=\"section\">";
             echo "<img src=\"{$person->img_filename}\" />";
             echo "<p>{$person->first_name}, {$person->last_name}</p>";
-            echo "<p>{$person->zipcode}, {$person->business_place}</p>";
-            echo "<p class=\"sectionCompany\">{$person->business_name}</p>";
+            echo "<p>{$person->id}</p>";
+            if($person->admin == 0)
+            {
+                echo "<p class=\"sectionCompany\">Gebruiker</p>";
+            }
+            else if ($person->admin == 1)
+            {
+                echo "<p class=\"sectionCompany\">Admin</p>";
+            }
             echo "</div><hr />";
         }
         if (empty($result)) {
@@ -66,29 +111,6 @@
     </div>
 
 </section>
-
-
-<form method="post" action="gebruikers.php">
-    <input type="text" placeholder="Username" name="username">
-    <br><br>
-    <input type="text" placeholder="First name" name="firstname">
-    <br><br>
-    <input type="text" placeholder="insertion" name="insertion">
-    <br><br>
-    <input type="text" placeholder="Last name" name="lastname">
-    <br><br>
-    <input type="text" placeholder="Telephone" name="telephone">
-    <br><br>
-    <input type="text" placeholder="Password" name="password">
-    <br><br>
-    <select name="role">
-        <option value="gebruiker">Gebruiker</option>
-        <option value="admin">Admin</option>
-    </select>
-    <br><br>
-    <input type="submit" name="add">
-</form>
-
 
 <?php
 
@@ -129,12 +151,26 @@ if(isset($_POST['add']))
     <img src="images/profile_pictures/kim.jpg">
     <h2>Kim, Jung Un</h2>
     <div class="paraSide">
-        <p><i class="fas fa-address-book" style="color: black"></i> Kim Jung Un</p>
-        <p><i class="fas fa-building" style="color: black"></i> Microsoft</p>
-        <p><i class="fas fa-envelope" style="color: black"></i> kimjungun@gmail.com</p>
-        <p><i class="fas fa-phone" style="color: black"></i> +31 1238624</p>
-        <p><i class="fas fa-phone" style="color: black"></i> 0315-18793712</p>
-        <p><i class="fas fa-building" style="color: black"></i> Ulft</p>
+        <form method="post" action="gebruikers.php">
+            <input type="text" placeholder="Username" name="username">
+            <br><br>
+            <input type="text" placeholder="First name" name="firstname">
+            <br><br>
+            <input type="text" placeholder="insertion" name="insertion">
+            <br><br>
+            <input type="text" placeholder="Last name" name="lastname">
+            <br><br>
+            <input type="text" placeholder="Telephone" name="telephone">
+            <br><br>
+            <input type="text" placeholder="Password" name="password">
+            <br><br>
+            <select name="role">
+                <option value="gebruiker">Gebruiker</option>
+                <option value="admin">Admin</option>
+            </select>
+            <br><br>
+            <input type="submit" name="add">
+        </form>
     </div>
     <div class="deleteChange">
         <i class="fas fa-pencil-alt"></i>
