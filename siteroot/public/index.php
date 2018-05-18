@@ -1,6 +1,13 @@
-<?php include('includes/Contactpersoon.php'); ?>
+<?php
+        require_once("../includes/initialize.php");
+        if(!$session->is_logged_in())
+        {
+            redirect_to("login.php");
+        }
+?>
 <?php include 'layouts/index_header.php'; ?>
-<?php require_once('includes/ContactPersoon.php'); ?>
+
+
 
 
 <!-- THIS SECTION CHANGES DEPENDEND ON SQL-QUERY -->

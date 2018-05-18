@@ -19,7 +19,7 @@
         <nav>
             <ul class="menu">
                 <li>
-                    <a href="#">
+                    <a href="gebruikers.php">
                         <div class="sidepanel-button gebruikers-but">
                             <h4>Gebruikers</h4>
                             <i class="fas fa-user fa-2x sidepanel-icons"></i>
@@ -27,7 +27,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="index.php">
                         <div class="sidepanel-button contacten-but">
                             <h4>Contacten</h4>
                             <i class="fas fa-users fa-2x sidepanel-icons"></i>
@@ -35,7 +35,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="login.html">
+                    <a href="logout.php">
                         <div class="sidepanel-button uitloggen-but">
                             <h4>Uitloggen</h4>
                             <i class="fas fa-key fa-2x sidepanel-icons"></i>

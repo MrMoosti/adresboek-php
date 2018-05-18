@@ -5,7 +5,7 @@ include("../Layouts/LoginPage.html");
 
 
 if (isset($_POST['submit'])){
-    include 'config.php';
+    include 'Config.php';
     $username = $_POST['username'];
     $password = $_POST['password'];
 

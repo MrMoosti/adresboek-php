@@ -1,7 +1,7 @@
 <?php include('includes/Contactpersoon.php'); ?>
 <?php include 'layouts/index_header.php'; ?>
-<?php require_once('includes/ContactPersoon.php'); ?>
-<?php include ('includes/User.php');?>
+<?php require_once('includes/Contactpersoon.php'); ?>
+<?php include('includes/User.php');?>
 
 <!-- THIS SECTION CHANGES DEPENDEND ON SQL-QUERY -->
 <section id="content">
