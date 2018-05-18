@@ -1,0 +1,34 @@
+@keyframes text {
+    0%   {color: red;}
+    25%  {color: yellow;}
+    50%  {color: blue;}
+    100% {color: green;}
+}
+
+.M {
+    animation-name: text;
+    animation-duration: 10s;
+    animation-iteration-count: 30;
+}
+
+@keyframes korbe {
+    0%   {left:0px; top:0px; }
+    25%  { left:700px; top:40px; transform: rotate(100deg);}
+    50%  {left:200px; top:200px; transform: rotate(200deg);}
+    75%  { left:0px; top:36px; transform: rotate(300deg);}
+    80% { left:800px; top:650px; transform: rotate(360deg);}
+    100% { left:0px; top:0px;}
+}
+
+
+.korbe {
+    width: 100px;
+    height: 100px;
+    position: relative;
+
+    animation-name: korbe;
+    animation-iteration-count: infinite;
+    animation-duration: 10s;
+    float: left;
+
+}
