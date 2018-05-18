@@ -24,6 +24,10 @@ html, body {
 }
 
 /* LOGIN PAGE */
+hr {
+    border: 1px;
+    color: #2960aa;
+}
 
 #container {
     width: 100%;
@@ -668,7 +672,4 @@ form.searchForm a {
     #detail p {
         font-size: 1em;
     }
-}
-hr {
-    border: 1px solid lightgray;
 }
