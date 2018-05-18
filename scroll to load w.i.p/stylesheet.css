@@ -558,3 +558,16 @@ form.searchForm a {
     background-color: #EEEEEE;
   }
 }
+
+.loading-image {
+    display: block;
+    margin: 5px auto;
+}
+
+.end-record-info {
+    text-align: center;
+    border-top: 1px solid #ddd;
+    padding: 5px 0;
+    background: #f9f9f9;
+}
+
