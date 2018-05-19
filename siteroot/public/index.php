@@ -6,6 +6,51 @@
         }
         include 'layouts/index_header.php'; ?>
 
+    <!-- ON EVERY PAGE -->
+    <div id="side-panel">
+        <nav>
+            <ul class="menu">
+                <?php
+                    if($session->is_admin())
+                    {
+                        echo "<li>";
+                        echo "<a href=\"gebruikers.php\">";
+                        echo "<div class=\"sidepanel-button gebruikers-but\">";
+                        echo "<h4>Gebruikers</h4>";
+                        echo "<i class=\"fas fa-user fa-2x sidepanel-icons\"></i>";
+                        echo "</div>";
+                        echo "</a>";
+                        echo "</li>";
+                    }
+                ?>
+                <li>
+                    <a href="index.php">
+                        <div class="sidepanel-button contacten-but">
+                            <h4>Contacten</h4>
+                            <i class="fas fa-users fa-2x sidepanel-icons"></i>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="logout.php">
+                        <div class="sidepanel-button uitloggen-but">
+                            <h4>Uitloggen</h4>
+                            <i class="fas fa-key fa-2x sidepanel-icons"></i>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+
+            <a href="#">
+                <div id="drop-down">
+                    <i class="fas fa-angle-down"></i>
+                </div>
+            </a>
+
+        </nav>
+    </div>
+    <!-- ON EVERY PAGE -->
+
 <!-- THIS SECTION CHANGES DEPENDEND ON SQL-QUERY -->
 <section id="content">
     <div class="search">
@@ -43,6 +88,10 @@
                 </a>
             </li>
         </ul>
+    </div>
+
+    <div id="create-button">
+        <a href="#"><i class="fas fa-plus"></i></a>
     </div>
 
     <div class="listNames">
@@ -146,5 +195,7 @@
         <i class="fas fa-trash"></i>
     </div>
 </section>
+
+
 
 <?php include 'layouts/index_footer.php';?>

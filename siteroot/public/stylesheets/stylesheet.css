@@ -192,7 +192,7 @@ nav li {
 }
 
 .sidepanel-button {
-    background-color: #EEEEEE;
+    background-color: #e5e5e5;
     display: block;
     height: 91px;
     border-bottom: 1px solid #C8C8C8;
@@ -264,14 +264,28 @@ form.searchForm a {
     margin-bottom: 25px;
 }
 
+#content > div.listNames > a {
+    text-decoration: none;
+}
+
 .section {
     padding: 1px;
     height: 85px;
     cursor: pointer;
 }
 
+#detail > div.paraSide > form > input[type="text"] , #detail > div.paraSide > form > select , #detail > div.paraSide > form > input[type="submit"] , #detail > div.paraSide > form > input[type="password"] , #detail > div.paraSide > form > input[type="email"] {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    height: 30px;
+    font-size: 1.3em;
+    padding-left: 20px;
+    margin-bottom: 1em !important;
+}
+
 .section:hover {
-    background-color: #EEEEEE;
+    background-color: #e5e5e5;
 }
 
 .section img {
@@ -304,12 +318,32 @@ form.searchForm a {
     font-size: 0.9em;
 }
 
+#create-button {
+    background-color: #2960aa;
+    width: 75px;
+    height: 75px;
+    border-radius: 100%;
+    position: fixed;
+    z-index: 99;
+    margin-top: 90%;
+    margin-left: 70%;
+}
+
+#create-button > a > i {
+    font-size: 2.2em !important;
+    color: white;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
 /* DETAIL PANEL */
 
 #detail {
     width: 100%;
     display: block;
-    background-color: #EEEEEE;
+    background-color: #e5e5e5;
 }
 
 #detail img {
@@ -346,6 +380,14 @@ form.searchForm a {
     margin-top: 1em;
 }
 
+#detail > div.deleteChange > a {
+    color: black;
+}
+
+#detail > div.deleteChange > a:hover {
+    color: gray;
+}
+
 .deleteChange i {
     font-size: 1.8em;
     margin-right: 15px;
@@ -366,6 +408,11 @@ form.searchForm a {
     .deleteChange {
         margin-top: 1em;
     }
+    #create-button {
+        margin-top: 60%;
+        margin-left: 70%;
+    }
+
 }
 
 /* Medium devices (tablets, 768px and up) */
@@ -377,6 +424,10 @@ form.searchForm a {
     }
     .deleteChange {
         margin-top: 1em;
+    }
+    #create-button {
+        margin-top: 50%;
+        margin-left: 70%;
     }
 }
 
@@ -403,7 +454,7 @@ form.searchForm a {
 
     /* SIDE PANEL */
     #side-panel {
-        background-color: #EEEEEE;
+        background-color: #e5e5e5;
         width: 15%;
         height: 90%;
     }
@@ -438,7 +489,7 @@ form.searchForm a {
     }
 
     .sidepanel-button {
-        background-color: #EEEEEE;
+        background-color: #e5e5e5;
         height: 55px;
     }
 
@@ -458,6 +509,11 @@ form.searchForm a {
         height: 75%;
         padding-left: 10px;
         padding-top: 10px;
+    }
+
+    #create-button {
+        margin-top: 40%;
+        margin-left: 70%;
     }
 
     #side-panel {
@@ -550,7 +606,7 @@ form.searchForm a {
         display: inline-block;
         position: absolute;
         margin-left: 65%;
-        background-color: #EEEEEE;
+        background-color: #e5e5e5;
     }
 
     #content > div.search > form > a > i {
@@ -568,6 +624,10 @@ form.searchForm a {
     #detail img {
         width: 150px;
         height: 150px;
+    }
+
+    #create-button > a > i{
+        padding-left: 0 !important;
     }
 }
 
@@ -594,7 +654,7 @@ form.searchForm a {
 
     /* SIDE PANEL */
     #side-panel {
-        background-color: #EEEEEE;
+        background-color: #e5e5e5;
         width: 15%;
         height: 90%;
         position: relative;
@@ -630,7 +690,7 @@ form.searchForm a {
     }
 
     .sidepanel-button {
-        background-color: #EEEEEE;
+        background-color: #e5e5e5;
         height: 55px;
     }
 
@@ -655,6 +715,14 @@ form.searchForm a {
         width: 65%;
         display: inline-block;
     }
+    #create-button > a > i {
+        padding-left: 0 !important;
+    }
+
+    #create-button {
+        margin-top: 30%;
+        margin-left: 50%;
+    }
 
     form.searchForm a {
         font-size: 1.8em;
@@ -667,7 +735,7 @@ form.searchForm a {
         display: inline-block;
         position: absolute;
         margin-left: 65%;
-        background-color: #EEEEEE;
+        background-color: #e5e5e5;
     }
 
     #detail img {

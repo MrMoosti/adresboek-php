@@ -12,6 +12,8 @@ class Session
     private $logged_in = false;
     public $user_id;
     public $message;
+    public $user_role;
+    public $is_admin = false;
 
     function __construct()
     {
@@ -33,12 +35,36 @@ class Session
         return $this->logged_in;
     }
 
+    public function is_admin()
+    {
+        if($this->user_role == 1)
+        {
+            $this->is_admin = true;
+        }
+        else if($this->user_role == 0)
+        {
+            $this->is_admin = false;
+        }
+        return $this->is_admin;
+    }
+
     public function login($user)
     {
         // Database should find user based on username/$password
         if($user)
         {
             $this->user_id = $_SESSION['user_id'] = $user->id;
+            $this->user_role = $_SESSION['user_role'] = $user->admin;
+
+            if($user->admin == 0)
+            {
+                $this->is_admin = false;
+            }
+            else if($user->admin == 1)
+            {
+                $this->is_admin = true;
+            }
+
             $this->logged_in = true;
         }
     }
@@ -48,6 +74,7 @@ class Session
         unset($_SESSION['user_id']);
         unset($this->user_id);
         $this->logged_in = false;
+        $this->is_admin = false;
     }
 
     public function message($msg = "")
@@ -70,11 +97,14 @@ class Session
         if(isset($_SESSION['user_id']))
         {
             $this->user_id = $_SESSION['user_id'];
+            $this->user_role = $_SESSION['user_role'];
+
             $this->logged_in = true;
         }
         else
         {
             unset($this->user_id);
+            unset($this->user_role);
             $this->logged_in = false;
         }
     }

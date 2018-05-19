@@ -17,7 +17,7 @@ if(isset($_POST["limit"], $_POST["start"]))
         echo "<div class=\"section\">";
         echo "<img src=\"{$person->img_filename}\" />";
         echo "<p>{$person->first_name}, {$person->last_name}</p>";
-        echo "<p>{$person->zipcode}, {$person->business_place}</p>";
+        echo "<p>{$person->email}</p>";
         echo "<p class=\"sectionCompany\">{$person->business_name}</p>";
         echo "</div>";
         echo "<hr>";

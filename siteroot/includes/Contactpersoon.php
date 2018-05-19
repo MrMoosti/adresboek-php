@@ -6,11 +6,21 @@ require_once(LIB_PATH.DS.'Database.php');
 class Contactpersoon extends DatabaseObject
 {
     protected static $table_name = "contactperson";
-    protected static $db_fields = array('id', 'username', 'first_name', 'insertion', 'last_name', 'business_name', 'business_place', 'zipcode', 'email', 'telephone_work',
-                                        'telephone_private', 'img_filename', 'img_size', 'img_type');
+    protected static $db_fields = array('id', 'first_name', 'insertion', 'last_name', 'business_name', 'email', 'telephone_private',
+                                        'telephone_work', "work_location",'img_filename', 'img_size', 'img_type');
 
-    public $id, $username, $first_name, $last_name, $insertion, $business_name, $business_place,
-    $zipcode, $email, $telephone_work, $telephone_private, $img_filename,  $img_size, $img_type;
+    public $id;
+    public $first_name;
+    public $insertion;
+    public $last_name;
+    public $business_name;
+    public $email;
+    public $telephone_private;
+    public $telephone_work;
+    public $work_location;
+    public $img_filename;
+    public $img_size;
+    public $img_type;
 
     private function has_attribute($attribute)
     {
