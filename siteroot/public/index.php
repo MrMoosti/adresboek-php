@@ -170,7 +170,7 @@
                             start = start + 50;
                             setTimeout(function () {
                                 load_data(50, start, findGET());
-                            }, 1000);
+                            }, 650);
                         }
                     }
                 });
