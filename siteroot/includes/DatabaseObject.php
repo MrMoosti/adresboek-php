@@ -22,10 +22,10 @@ class DatabaseObject
     {
         global $database;
         $searchq = preg_replace("#[^0-9a-z]#i", "", $searchq);
-        $sql = "SELECT * FROM ".$table_name." WHERE first_name LIKE '%".$searchq."%'";
+        $sql  = "SELECT * FROM ".$table_name." WHERE first_name LIKE '%".$searchq."%'";
         $sql .= " OR last_name LIKE '%".$searchq."%'";
         $sql .= " OR business_name LIKE '%".$searchq."%'";
-        $sql .= " OR business_place LIKE '%".$searchq."%' ORDER BY first_name ASC";
+        $sql .= " OR work_location LIKE '%".$searchq."%' ORDER BY first_name ASC";
         $result = static::find_by_sql($sql);
         return $result;
     }
