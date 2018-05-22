@@ -7,7 +7,7 @@ class Contactpersoon extends DatabaseObject
 {
     protected static $table_name = "contactperson";
     protected static $db_fields = array('id', 'first_name', 'insertion', 'last_name', 'business_name', 'email', 'telephone_private',
-                                        'telephone_work', "work_location",'img_filename', 'img_size', 'img_type');
+                                        'telephone_work', 'work_location','img_filename', 'img_size', 'img_type');
 
     public $id;
     public $first_name;

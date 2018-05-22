@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 4.8.0
 -- https://www.phpmyadmin.net/
 --
@@ -1683,35 +1683,35 @@ INSERT INTO `contactperson` (`id`, `first_name`, `insertion`, `last_name`, `busi
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
-  `username` varchar(255) COLLATE utf8_bin NOT NULL,
   `first_name` varchar(255) COLLATE utf8_bin NOT NULL,
-  `insertion` varchar(255) COLLATE utf8_bin NOT NULL,
+  `insertion` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `last_name` varchar(255) COLLATE utf8_bin NOT NULL,
+  `email` varchar(255) COLLATE utf8_bin NOT NULL,
   `telephone` varchar(255) COLLATE utf8_bin NOT NULL,
+  `username` varchar(255) COLLATE utf8_bin NOT NULL,
   `password` varchar(255) COLLATE utf8_bin NOT NULL,
   `admin` tinyint(1) NOT NULL,
-  `img_filename` varchar(255) COLLATE utf8_bin NOT NULL,
-  `img_size` int(11) NOT NULL,
-  `img_type` varchar(255) COLLATE utf8_bin NOT NULL
+  `img_filename` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `img_size` int(11) DEFAULT NULL,
+  `img_type` varchar(255) COLLATE utf8_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `first_name`, `insertion`, `last_name`, `telephone`, `password`, `admin`, `img_filename`, `img_size`, `img_type`) VALUES
-(1, 'admin', 'leo', '', 'korbee', '0612345678', 'admin', 1, 'https://cdn1.thr.com/sites/default/files/imagecache/scale_crop_768_433/2017/08/110129_0195b2_-_h_2017.jpg', 0, ''),
-(2, 'user', 'henk', '', 'Potvis', '06456123', 'user', 0, 'https://i.gyazo.com/75d6acbca0a614839bb83b1fd8eb42f1.jpg', 0, '');
+INSERT INTO `user` (`id`, `first_name`, `insertion`, `last_name`, `email`, `telephone`, `username`, `password`, `admin`, `img_filename`, `img_size`, `img_type`) VALUES
+(1, 'Mustafa', '', 'Yilmaz', 'mustafa.yilmaz@gmail.com', '0315-123456789', 'mustafa.yilmaz', 'yilmaz', 0, '', 0, ''),
+(2, 'Bram', NULL, 'Korbeetje', 'bram.korbeetje@gmail.com', '0315-123456789', 'bram.korbeetje', 'korbeetje', 0, NULL, NULL, NULL),
+(3, 'Jacco', NULL, 'Wacko', 'jacko.wacko@gmail.com', '0315-123456789', 'jacko.wacko', 'wacko', 0, NULL, NULL, NULL),
+(4, 'Jesse', NULL, 'Baljeet', 'jesse.baljeet@gmail.com', '0315-123456789', 'jesse.baljeet', 'baljeet', 0, NULL, NULL, NULL),
+(5, 'Jelmer', NULL, 'Jasgoed', 'jelmer.jasgoed@gmail.com', '0315-123456789', 'jelmer.jasgoed', 'jasgoed', 0, NULL, NULL, NULL),
+(6, 'Admin', '', 'Admin', 'admin@admin.com', '0315-123456789', 'admin', 'admin', 1, '', 0, ''),
+(29, 'Gebruiker', '', 'Gebruiker', 'gebruiker@gebruiker.com', 'gebruiker1234', 'gebruikertje', 'gebruiker', 0, '', 0, '');
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `contactperson`
---
-ALTER TABLE `contactperson`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `user`
@@ -1724,16 +1724,10 @@ ALTER TABLE `user`
 --
 
 --
--- AUTO_INCREMENT for table `contactperson`
---
-ALTER TABLE `contactperson`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1621;
-
---
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
