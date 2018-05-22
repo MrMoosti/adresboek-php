@@ -136,7 +136,7 @@
                                 action = 'active';
                             } else {
                                 if (findGET() == null || findGET() == "") {
-                                    $('#load_data_message').html("<div id='loadingGif'><img src='https://i.gyazo.com/8ee2faef3efa92e0a932eb1a36659cdb.gif'/></div>");
+                                    $('#load_data_message').html("<div id='loadingGif'><img src='images/loading.gif'/></div>");
                                     action = "inactive";
                                 } else {
                                     action = "active";
