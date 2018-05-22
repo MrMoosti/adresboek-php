@@ -283,6 +283,26 @@ form.searchForm a {
     margin-bottom: 1em !important;
 }
 
+#detail > form > input , #detail > form > select {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    height: 30px;
+    font-size: 1.3em;
+    padding-left: 20px;
+    margin-bottom: 1em !important;
+}
+
+#fileToUpload {
+    margin-top: 20px;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    height: 30px;
+    font-size: 1.3em;
+    margin-bottom: 1em !important;
+}
+
 .section:hover {
     background-color: #e5e5e5;
 }

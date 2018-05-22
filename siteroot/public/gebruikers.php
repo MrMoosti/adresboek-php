@@ -158,14 +158,53 @@ if(isset($_POST['add']))
     $user->password = $password_post;
     $user->admin = $role_post;
     $user->save();
+
+//    $path = $_FILES['fileToUpload']['name'];
+//    $ext = pathinfo($path, PATHINFO_EXTENSION);
+//    $target_file = $target_dir . $filename . "." . $ext;
+
+    $user->img_filename = upload_image($user->id);
+    $user->img_size = getFileSize();
+    $user->img_type = getFileType("images/profile_pictures/" . $user->id . "." . pathinfo($_FILES['fileToUpload']['name'], PATHINFO_EXTENSION));
+    $user->save();
+
     echo "<script type=\"text/javascript\">location.href = 'gebruikers.php?user_id={$user->id}';</script>";
 
 }
 ?>
 
 <section id="detail">
-    <img src="images/profile_pictures/kim.jpg">
     <?php
+    if(!isset($_GET['adduser']))
+    {
+        if (isset($_GET['user_id']))
+        {
+            $current_user_id = $_GET['user_id'];
+            $current_user = User::find_by_id($current_user_id);
+            if($current_user->img_filename == null || $current_user->img_filename == "")
+            {
+                echo "<img src='images/profile_pictures/kim.jpg' alt='profile_pic' >";
+            }
+            else
+            {
+                echo "<img src='{$current_user->img_filename}' alt='profile_pic' >";
+            }
+        }
+        else if(isset($_GET['edit_user']))
+        {
+            $edit_user_id = $_GET['edit_user'];
+            $edit_user = User::find_by_id($edit_user_id);
+            if($edit_user->img_filename == null || $edit_user->img_filename == "")
+            {
+                echo "<img src='images/profile_pictures/kim.jpg' alt='profile_pic' >";
+            }
+            else
+            {
+                echo "<img src='{$edit_user->img_filename}' alt='profile_pic' >";
+            }
+        }
+    }
+
     ?>
     <div class="paraSide">
         <?php
@@ -174,7 +213,8 @@ if(isset($_POST['add']))
             $var = $_GET['adduser'];
             echo
             "
-             <form method=\"post\" action=\"gebruikers.php\">
+             <form method=\"post\" action=\"gebruikers.php\" enctype=\"multipart/form-data\">
+                <input type='file' id='fileToUpload' name='fileToUpload'>
                 <input type=\"text\" required placeholder=\"Voornaam\" name=\"firstname\">
                 <input type=\"text\" placeholder=\"Tussenvoegsel\" name=\"insertion\">
                 <input type=\"text\" required placeholder=\"Achternaam\" name=\"lastname\">
@@ -251,7 +291,8 @@ if(isset($_POST['add']))
             $info_edit_user_id = $_GET['edit_user'];
             $info_edit_user = User::find_by_id($info_edit_user_id);
 
-            echo "<form method=\"post\" action=\"gebruikers.php?edit_user={$info_edit_user_id}\">";
+            echo "<form method=\"post\" action=\"gebruikers.php?edit_user={$info_edit_user_id}\"> enctype=\"multipart/form-data\"";
+            echo "<input type='file' id='fileToUpload' name='fileToUpload' >";
             echo "<input type=\"text\" required value='{$info_edit_user->first_name}' name=\"firstname\">";
             echo "<input type=\"text\" value='{$info_edit_user->insertion}' name=\"insertion\">";
             echo "<input type=\"text\" required value='{$info_edit_user->last_name}' name=\"lastname\">";
