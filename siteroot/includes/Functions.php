@@ -86,7 +86,7 @@ function upload_image($filename="")
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 // Check if image file is a actual image or fake image
-    if(isset($_POST["add"])) {
+    if(isset($_POST["add"]) || isset($_POST["edit"])) {
         $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
         if($check !== false) {
 //            echo "File is an image - " . $check["mime"] . ".";
@@ -96,26 +96,23 @@ function upload_image($filename="")
             $uploadOk = 0;
         }
     }
-// Check if file already exists
-    if (file_exists($target_file)) {
-//        echo "Sorry, file already exists.";
-        $uploadOk = 0;
-    }
-// Check file size
-    if ($_FILES["fileToUpload"]["size"] > 500000) {
-        //echo "Sorry, your file is too large.";
+
+// Check file size 2MB
+    if ($_FILES["fileToUpload"]["size"] > 2000000) {
+//        echo "Sorry, your file is too large.";
+        alertBox("Foto is groter dan 2MB!");
         $uploadOk = 0;
     }
 // Allow certain file formats
     if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
         && $imageFileType != "gif" ) {
-        //echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+//        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+        alertBox("Alleen foto's met het type: .jpg / .png / .jpeg / .gif zijn toegestaan");
         $uploadOk = 0;
     }
 // Check if $uploadOk is set to 0 by an error
     if ($uploadOk == 0)
     {
-        //echo "Sorry, your file was not uploaded.";
 // if everything is ok, try to upload file
     } else {
         move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
@@ -123,14 +120,18 @@ function upload_image($filename="")
     return $target_file;
 }
 
-function getfileSize()
+function getFileSize($userid="")
 {
-    return filesize( "images/profile_pictures/". $_FILES["fileToUpload"]["name"]);
+    return filesize( "images/profile_pictures/". $userid . "." . pathinfo($_FILES['fileToUpload']['name'], PATHINFO_EXTENSION));
 }
 
 function getFileType($target_file="")
 {
     return strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+}
+
+function alertBox($msg) {
+    echo '<script type="text/javascript">alert("' . $msg . '")</script>';
 }
 
 ?>

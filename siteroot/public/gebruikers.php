@@ -164,7 +164,7 @@ if(isset($_POST['add']))
 //    $target_file = $target_dir . $filename . "." . $ext;
 
     $user->img_filename = upload_image($user->id);
-    $user->img_size = getFileSize();
+    $user->img_size = getFileSize($user->id);
     $user->img_type = getFileType("images/profile_pictures/" . $user->id . "." . pathinfo($_FILES['fileToUpload']['name'], PATHINFO_EXTENSION));
     $user->save();
 
@@ -284,6 +284,12 @@ if(isset($_POST['add']))
             $info_edit_user->password = $password_post;
             $info_edit_user->admin = $role_post;
             $info_edit_user->save();
+
+            $info_edit_user->img_filename = upload_image($info_edit_user->id);
+            $info_edit_user->img_size = getFileSize($info_edit_user->id);
+            $info_edit_user->img_type = getFileType("images/profile_pictures/" . $info_edit_user->id . "." . pathinfo($_FILES['fileToUpload']['name'], PATHINFO_EXTENSION));
+            $info_edit_user->save();
+
             echo "<script type=\"text/javascript\">location.href = 'gebruikers.php?user_id={$info_edit_user->id}';</script>";
         }
         if(isset($_GET['edit_user']))
@@ -291,7 +297,7 @@ if(isset($_POST['add']))
             $info_edit_user_id = $_GET['edit_user'];
             $info_edit_user = User::find_by_id($info_edit_user_id);
 
-            echo "<form method=\"post\" action=\"gebruikers.php?edit_user={$info_edit_user_id}\"> enctype=\"multipart/form-data\"";
+            echo "<form method=\"post\" action=\"gebruikers.php?edit_user={$info_edit_user_id}\" enctype=\"multipart/form-data\">";
             echo "<input type='file' id='fileToUpload' name='fileToUpload' >";
             echo "<input type=\"text\" required value='{$info_edit_user->first_name}' name=\"firstname\">";
             echo "<input type=\"text\" value='{$info_edit_user->insertion}' name=\"insertion\">";
