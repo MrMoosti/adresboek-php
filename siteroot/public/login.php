@@ -65,7 +65,7 @@ else // Form has not been submitted.
         </form>
         <?php echo output_message($message); ?>
         <div id="footer">
-            <a class="password" href="#">
+            <a class="password" href="forgotPassword.php">
                 <p>Wachtwoord Vergeten?</p>
             </a>
         </div>
