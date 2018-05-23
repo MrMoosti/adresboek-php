@@ -60,28 +60,28 @@ if(!$session->is_admin()) {
     <div class="sortNames">
         <ul type="none">
             <li class="voornaam-sorteren">
-                <a href="#">
-                    voornaam
-                    <i class="fa fa-caret-down"></i>
-                </a>
+                <form id="sortId">
+                    <a href="#">
+                        Id
+                        <i class="fa fa-caret-down"></i>
+                    </a>
+                </form>
             </li>
             <li class="achternaam-sorteren">
-                <a href="#">
-                    achternaam
-                    <i class="fa fa-caret-down"></i>
-                </a>
+                <form id="sortVoornaam">
+                    <a href="#">
+                        voornaam
+                        <i class="fa fa-caret-down"></i>
+                    </a>
+                </form>
             </li>
             <li class="plaats-sorteren">
-                <a href="#">
-                    plaats
-                    <i class="fa fa-caret-down"></i>
-                </a>
-            </li>
-            <li class="bedrijfsnaam-sorteren">
-                <a href="#">
-                    bedrijfsnaam
-                    <i class="fa fa-caret-down"></i>
-                </a>
+                <form id="sortAchternaam">
+                    <a href="#">
+                        achternaam
+                        <i class="fa fa-caret-down"></i>
+                    </a>
+                </form>
             </li>
         </ul>
     </div>

@@ -29,17 +29,14 @@ $(document).ready(function () {
             $('#load_data').append(data);
         });
     }
+    $('#sortId').click(function () {
+        sortF('id');
+    });
     $('#sortVoornaam').click(function () {
         sortF('first_name');
     });
     $('#sortAchternaam').click(function () {
         sortF('last_name');
-    });
-    $('#workLocation').click(function () {
-        sortF('work_location');
-    });
-    $('#businessName').click(function () {
-        sortF('business_name');
     });
     function load_data(limit, start, search) {
         $.ajax({
