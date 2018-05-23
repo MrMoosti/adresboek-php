@@ -267,6 +267,10 @@ form.searchForm a {
     text-decoration: none;
 }
 
+#load_data a {
+    text-decoration: none;
+}
+
 .section {
     padding: 1px;
     height: 85px;

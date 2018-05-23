@@ -51,7 +51,7 @@ if(!$session->is_admin()) {
 <section id="content">
     <div class="search">
         <form class="searchForm" method="get" id="searchForm">
-            <input type="text" name="voornaam" placeholder="Zoeken"/>
+            <input type="text" name="search" placeholder="Zoeken"/>
             <a href="#" onclick="document.getElementById('searchForm').submit()" rel="search">
                 <i class="fa fa-search"></i>
             </a>
@@ -91,35 +91,9 @@ if(!$session->is_admin()) {
     </div>
 
     <div class="listNames">
-        <?php
-        if (isset($_GET['voornaam'])) {
-            $searchResult = $_GET['voornaam'];
-            $result = User::search($searchResult, "user");
-        }
-        else {
-            $result = User::find_all();
-        }
-        foreach ($result as $person) {
-            echo "<a href='?user_id={$person->id}'> <div id='whole-card'>";
-            echo "<div class='section'>";
-            echo "<img src=\"{$person->img_filename}\" />";
-            echo "<p>{$person->first_name}, {$person->insertion} {$person->last_name}</p>";
-            echo "<p>ID: {$person->id}</p>";
-            if($person->admin == 0)
-            {
-                echo "<p class=\"sectionCompany\">Gebruiker</p>";
-            }
-            else if ($person->admin == 1)
-            {
-                echo "<p class=\"sectionCompany\">Admin</p>";
-            }
-            echo "</div><hr />";
-            echo "</div></a>";
-        }
-        if (empty($result)) {
-            echo "Er zijn geen resultaten gevonden";
-        }
-        ?>
+        <div id="load_data"></div>
+        <div id="load_data_message"></div>
+        <script src="js/UserList.js"></script>
     </div>
 
 </section>
