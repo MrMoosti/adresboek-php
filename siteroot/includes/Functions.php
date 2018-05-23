@@ -120,6 +120,34 @@ function upload_image($filename="")
     return $target_file;
 }
 
+function delete_image($file="")
+{
+    $ext = "";
+    if(file_exists($file . ".png") || file_exists($file . ".PNG"))
+    {
+        $ext = ".png";
+    }
+    else if(file_exists($file . ".jpg")|| file_exists($file  . ".JPG"))
+    {
+        $ext = ".jpg";
+    }
+    else if(file_exists($file . ".jpeg")|| file_exists($file  . ".JPEG"))
+    {
+        $ext = ".jpeg";
+    }
+    else if(file_exists($file . ".gif")|| file_exists($file  . ".GIF"))
+    {
+        $ext = ".gif";
+    }
+
+
+    if (file_exists($file . $ext))
+    {
+        unlink($file . $ext);
+    }
+    return $file . $ext;
+}
+
 function getFileSize($userid="")
 {
     return filesize( "images/profile_pictures/". $userid . "." . pathinfo($_FILES['fileToUpload']['name'], PATHINFO_EXTENSION));

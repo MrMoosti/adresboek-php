@@ -353,6 +353,9 @@ if(isset($_POST['add']))
         {
             $remove_user_id = $_GET['remove_user'];
             $remove_user = User::find_by_id($remove_user_id);
+            echo delete_image("images/profile_pictures/" . $remove_user->id);
+
+
             $remove_user->delete();
             echo "<script type=\"text/javascript\">location.href = 'gebruikers.php';</script>";
         }
