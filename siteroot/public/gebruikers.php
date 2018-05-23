@@ -265,6 +265,7 @@ if(isset($_POST['add']))
             $username_post = $_POST['username'];
             $password_post = $_POST['password'];
             $role_post = $_POST['role'];
+            //$info_picture_uploaded = $_POST['fileToUpload'];
 
             if($role_post == "admin")
             {
@@ -285,11 +286,17 @@ if(isset($_POST['add']))
             $info_edit_user->admin = $role_post;
             $info_edit_user->save();
 
-            $info_edit_user->img_filename = upload_image($info_edit_user->id);
-            $info_edit_user->img_size = getFileSize($info_edit_user->id);
-            $info_edit_user->img_type = getFileType("images/profile_pictures/" . $info_edit_user->id . "." . pathinfo($_FILES['fileToUpload']['name'], PATHINFO_EXTENSION));
-            $info_edit_user->save();
-
+            if ($_FILES['fileToUpload'])
+            {
+                if(!empty($_FILES['fileToUpload']['name']))
+                {
+                    $info_edit_user->img_filename = upload_image($info_edit_user->id);
+                    $info_edit_user->img_size = getFileSize($info_edit_user->id);
+                    $info_edit_user->img_type = getFileType("images/profile_pictures/" . $info_edit_user->id . "." . pathinfo($_FILES['fileToUpload']['name'], PATHINFO_EXTENSION));
+                    $info_edit_user->save();
+                }
+            }
+            
             echo "<script type=\"text/javascript\">location.href = 'gebruikers.php?user_id={$info_edit_user->id}';</script>";
         }
         if(isset($_GET['edit_user']))
