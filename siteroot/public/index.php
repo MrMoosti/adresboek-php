@@ -55,7 +55,7 @@
 <section id="content">
     <div class="search">
         <form class="searchForm" method="get" id="searchForm">
-            <input type="text" name="voornaam" placeholder="Zoeken" />
+            <input type="text" name="search" placeholder="Zoeken" />
             <a href="#" onclick="document.getElementById('searchForm').submit()" rel="search">
                 <i class="fa fa-search"></i>
             </a>
@@ -64,28 +64,36 @@
     <div class="sortNames">
         <ul type="none">
             <li class="voornaam-sorteren">
-                <a href="#">
-                    voornaam
-                    <i class="fa fa-caret-down"></i>
-                </a>
+                <form id="sortVoornaam">
+                    <a href="#">
+                        voornaam
+                        <i class="fa fa-caret-down"></i>
+                    </a>
+                </form>
             </li>
             <li class="achternaam-sorteren">
-                <a href="#">
-                    achternaam
-                    <i class="fa fa-caret-down"></i>
-                </a>
+                <form id="sortAchternaam">
+                    <a href="#">
+                        achternaam
+                        <i class="fa fa-caret-down"></i>
+                    </a>
+                </form>
             </li>
             <li class="plaats-sorteren">
-                <a href="#">
-                    plaats
-                    <i class="fa fa-caret-down"></i>
-                </a>
+                <form id="workLocation">
+                    <a href="#">
+                        plaats
+                        <i class="fa fa-caret-down"></i>
+                    </a>
+                </form>
             </li>
             <li class="bedrijfsnaam-sorteren">
-                <a href="#">
-                    bedrijfsnaam
-                    <i class="fa fa-caret-down"></i>
-                </a>
+                <form id="businessName">
+                    <a href="#">
+                        bedrijfsnaam
+                        <i class="fa fa-caret-down"></i>
+                    </a>
+                </form>
             </li>
         </ul>
     </div>
@@ -100,7 +108,7 @@
         </div>
         <div id="load_data_message"></div>
         <script>
-            function findGET() {
+            function findSearch() {
                 var result = null,
                     tmp = [];
                 location.search
@@ -108,26 +116,46 @@
                     .split("&")
                     .forEach(function (item) {
                         tmp = item.split("=");
-                        if (tmp[0] === "voornaam") result = decodeURIComponent(tmp[1]);
+                        if (tmp[0] === "search") result = decodeURIComponent(tmp[1]);
                     });
                 return result;
             }
             $(document).ready(function () {
-                            test();
-                function test() {
-                    for (var i = 0; i < 50; i++) {
-                            console.log(findGET());
-
-                    }
-                }
                 var limit = 20;
                 var start = 0;
                 var action = 'inactive';
+                var sort = 'first_name';
+                function sortF(x) {
+                    $('.listNames').scrollTop(0);
+                    start = 0;
+                    limit = 20;
+                    $.ajax({
+                        type: "POST",
+                        url: "CpData.php",
+                        data: { limit: limit, start: start, search: null, sort: x }
+                    }).done(function (data) {
+                        sort = x;
+                        $('#load_data').html('');
+                        $('#load_data').append(data);
+                    });
+                }
+                $('#sortVoornaam').click(function () {
+                    sortF('first_name');
+                });
+                $('#sortAchternaam').click(function () {
+                    sortF('last_name');
+                });
+                $('#workLocation').click(function () {
+                    sortF('work_location');
+                });
+                $('#businessName').click(function () {
+                    sortF('business_name');
+                });
                 function load_data(limit, start, search) {
                     $.ajax({
                         url: "CpData.php",
                         method: "POST",
-                        data: { limit: limit, start: start, search: search },
+                        data: { limit: limit, start: start, search: search, sort: sort },
                         cache: false,
                         success: function (data) {
                             $('#load_data').append(data);
@@ -135,12 +163,12 @@
                                 $('#load_data_message').html("<button type='button' class='btn btn-info'>No Data Found</button>");
                                 action = 'active';
                             } else {
-                                if (findGET() == null || findGET() == "") {
+                                if (findSearch() == null || findSearch() == "") {
                                     $('#load_data_message').html("<div id='loadingGif'><img src='images/loading.gif'/></div>");
                                     action = "inactive";
                                 } else {
                                     action = "active";
-                                    window.history.pushState("object or string", "Title", "/adresboek-php/siteroot/public/");
+                                    //window.history.pushState("object or string", "Title", "/adresboek-php/siteroot/public/");
                                 }
                             }
                             if (data == "No results"){
@@ -150,31 +178,30 @@
                         }
                     });
                 }
-                if (action == 'inactive' && findGET() == null) {
+                if (action == 'inactive' && findSearch() == null) {
                     action = 'active';
-                    load_data(limit, start, null);
+                    load_data(limit, start, null, sort);
                 } else {
                     action = 'active';
-                    load_data(limit, start, findGET());
+                    load_data(limit, start, findSearch(), sort);
                 }
                 $(".listNames").scroll(function () {
                     if ($(".listNames").scrollTop() + $(".listNames").height() > $("#load_data").height() && action == 'inactive') {
-                        if (findGET() == null) {
+                        if (findSearch() == null) {
                             action = 'active';
                             start = start + limit;
                             setTimeout(function () {
-                                load_data(limit, start, null);
+                                load_data(limit, start, null, sort);
                             }, 1000);
                         } else {
                             action = 'active';
-                            start = start + 50;
+                            start = start + limit;
                             setTimeout(function () {
-                                load_data(50, start, findGET());
+                                load_data(limit, start, findSearch(), sort);
                             }, 650);
                         }
                     }
                 });
-                            test();
             });
         </script>
     </div>
