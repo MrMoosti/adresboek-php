@@ -3,9 +3,9 @@ require_once("initialize.php");
 if(isset($_POST["limit"], $_POST["start"]))
 {
     if ($_POST['search'] != null) {
-        $searchq = preg_replace("#[^0-9a-z]#i", "", $_POST['search']);
-        $sql  = "SELECT * FROM user WHERE first_name LIKE '%".$searchq."%'";
-        $sql .= " OR last_name LIKE '%".$searchq."%'";
+        $searchq = preg_replace("#[^0-9a-z]#i", "", strtolower($_POST['search']));
+        $sql  = "SELECT * FROM user WHERE LOWER(first_name) LIKE '%".$searchq."%'";
+        $sql .= " OR LOWER(last_name) LIKE '%".$searchq."%'";
         $sql .= " OR id LIKE '%".$searchq."%'";
         $sql .= " ORDER BY ".$_POST["sort"]." ASC LIMIT ".$_POST["start"].", ".$_POST["limit"];
         $result = user::find_by_sql($sql);

@@ -21,7 +21,7 @@ $(document).ready(function () {
         limit = 20;
         $.ajax({
             type: "POST",
-            url: "CpData.php",
+            url: "../includes/CpData.php",
             data: { limit: limit, start: start, search: null, sort: x }
         }).done(function (data) {
             sort = x;
@@ -43,7 +43,7 @@ $(document).ready(function () {
     });
     function load_data(limit, start, search) {
         $.ajax({
-            url: "CpData.php",
+            url: "../includes/CpData.php",
             method: "POST",
             data: { limit: limit, start: start, search: search, sort: sort },
             cache: false,
