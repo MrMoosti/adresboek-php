@@ -1,11 +1,11 @@
-﻿-- phpMyAdmin SQL Dump
+-- phpMyAdmin SQL Dump
 -- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 22, 2018 at 09:37 AM
--- Server version: 10.1.30-MariaDB
--- PHP Version: 5.6.33
+-- Gegenereerd op: 23 mei 2018 om 14:36
+-- Serverversie: 10.1.29-MariaDB
+-- PHP-versie: 7.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `contactperson`
+-- Tabelstructuur voor tabel `contactperson`
 --
 
 CREATE TABLE `contactperson` (
@@ -44,7 +44,7 @@ CREATE TABLE `contactperson` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `contactperson`
+-- Gegevens worden geëxporteerd voor tabel `contactperson`
 --
 
 INSERT INTO `contactperson` (`id`, `first_name`, `insertion`, `last_name`, `business_name`, `email`, `telephone_private`, `telephone_work`, `work_location`, `img_filename`, `img_size`, `img_type`) VALUES
@@ -90,7 +90,7 @@ INSERT INTO `contactperson` (`id`, `first_name`, `insertion`, `last_name`, `busi
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Tabelstructuur voor tabel `user`
 --
 
 CREATE TABLE `user` (
@@ -105,50 +105,51 @@ CREATE TABLE `user` (
   `admin` tinyint(1) NOT NULL,
   `img_filename` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `img_size` int(11) DEFAULT NULL,
-  `img_type` varchar(255) COLLATE utf8_bin DEFAULT NULL
+  `img_type` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `token` varchar(10) COLLATE utf8_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `user`
+-- Gegevens worden geëxporteerd voor tabel `user`
 --
 
-INSERT INTO `user` (`id`, `first_name`, `insertion`, `last_name`, `email`, `telephone`, `username`, `password`, `admin`, `img_filename`, `img_size`, `img_type`) VALUES
-(1, 'Mustafa', '', 'Yilmaz', 'mustafa.yilmaz@gmail.com', '0315-123456789', 'mustafa.yilmaz', 'yilmaz', 0, '', 0, ''),
-(2, 'Bram', NULL, 'Korbeetje', 'bram.korbeetje@gmail.com', '0315-123456789', 'bram.korbeetje', 'korbeetje', 0, NULL, NULL, NULL),
-(3, 'Jacco', NULL, 'Wacko', 'jacko.wacko@gmail.com', '0315-123456789', 'jacko.wacko', 'wacko', 0, NULL, NULL, NULL),
-(4, 'Jesse', NULL, 'Baljeet', 'jesse.baljeet@gmail.com', '0315-123456789', 'jesse.baljeet', 'baljeet', 0, NULL, NULL, NULL),
-(5, 'Jelmer', NULL, 'Jasgoed', 'jelmer.jasgoed@gmail.com', '0315-123456789', 'jelmer.jasgoed', 'jasgoed', 0, NULL, NULL, NULL),
-(6, 'Admin', '', 'Admin', 'admin@admin.com', '0315-123456789', 'admin', 'admin', 1, '', 0, ''),
-(29, 'Gebruiker', '', 'Gebruiker', 'gebruiker@gebruiker.com', 'gebruiker1234', 'gebruikertje', 'gebruiker', 0, '', 0, '');
+INSERT INTO `user` (`id`, `first_name`, `insertion`, `last_name`, `email`, `telephone`, `username`, `password`, `admin`, `img_filename`, `img_size`, `img_type`, `token`) VALUES
+(1, 'Mustafa', '', 'Yilmaz', 'mustafa.yilmaz@gmail.com', '0315-123456789', 'mustafa.yilmaz', 'mustafa', 0, '', 0, '', NULL),
+(2, 'Bram', NULL, 'Korbeetje', 'bram.korbeetje@gmail.com', '0315-123456789', 'bram.korbeetje', 'bram', 0, NULL, NULL, NULL, NULL),
+(3, 'Jacco', NULL, 'Wacko', 'jaccobiezeman@gmail.com', '0315-123456789', 'jacko.wacko', 'jacko', 0, NULL, NULL, NULL, 'u9xw2k6dpq'),
+(4, 'Jesse', NULL, 'Baljeet', 'jesse.baljeet@gmail.com', '0315-123456789', 'jesse.baljeet', 'jesse', 0, NULL, NULL, NULL, NULL),
+(5, 'Jelmer', NULL, 'Jasgoed', 'jelmer.jasgoed@gmail.com', '0315-123456789', 'jelmer.jasgoed', 'jelmer', 0, NULL, NULL, NULL, NULL),
+(6, 'Admin', '', 'Admin', 'admin@admin.com', '0315-123456789', 'admin', 'admin', 1, '', 0, '', NULL),
+(29, 'Gebruiker', '', 'Gebruiker', 'gebruiker@gebruiker.com', 'gebruiker1234', 'gebruikertje', 'gebruiker', 0, '', 0, '', NULL);
 
 --
--- Indexes for dumped tables
+-- Indexen voor geëxporteerde tabellen
 --
 
 --
--- Indexes for table `contactperson`
+-- Indexen voor tabel `contactperson`
 --
 ALTER TABLE `contactperson`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `user`
+-- Indexen voor tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT voor geëxporteerde tabellen
 --
 
 --
--- AUTO_INCREMENT for table `contactperson`
+-- AUTO_INCREMENT voor een tabel `contactperson`
 --
 ALTER TABLE `contactperson`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT voor een tabel `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
