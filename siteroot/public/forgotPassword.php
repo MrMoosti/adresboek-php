@@ -1,5 +1,8 @@
 <?php
 require_once("../includes/initialize.php");
+ob_start();
+include ('layouts/mail_template.php');
+$body_html = ob_get_clean();
 
 	if (isset($_POST['forgotPass'])) {
 		$email = $db->escape_value($_POST['email']);
@@ -26,7 +29,14 @@ require_once("../includes/initialize.php");
 			$mail->Port = 465; //Poort voor TLS/STARTTLS: 587
 			$mail->Subject = "Wachtwoord veranderen";
 			$mail->isHTML(true);
-			$mail->Body = "<a href='$url'>Verander uw wachtwoord hier</a>";
+
+
+			$body_html = str_replace("{{email_address}})", $email, $body_html);
+			$body_html = str_replace("{{action_url}}", $url, $body_html);
+			$body_html = str_replace("{{support_url}}", "http://173.249.26.226/adresboek-php/siteroot/public/", $body_html);
+
+			$mail->Body = $body_html;
+			//$mail->Body = "<a href='$url'>Verander uw wachtwoord hier</a>";
 			$mail->setFrom('addressbook57@gmail.com', 'addressbook');
 
 			//sending email to
