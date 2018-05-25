@@ -10,12 +10,12 @@ if(isset($_POST["limit"], $_POST["start"]))
         $sql  = "SELECT * FROM contactperson WHERE LOWER(first_name) LIKE '%".$searchq."%'";
         $sql .= " OR LOWER(last_name) LIKE '%".$searchq."%'";
         $sql .= " OR LOWER(business_name) LIKE '%".$searchq."%'";
-        $sql .= " OR LOWER(work_location) LIKE '%".$searchq."%' ORDER BY ".$_POST["sort"]." ASC LIMIT ".$_POST["start"].", ".$_POST["limit"];
+        $sql .= " OR LOWER(work_location) LIKE '%".$searchq."%' ORDER BY LOWER(".$_POST["sort"].") ASC LIMIT ".$_POST["start"].", ".$_POST["limit"];
         $result = ContactPersoon::find_by_sql($sql);
         unset($_POST['search']);
     }
     else {
-        if($_POST["sort"] != null) $result = ContactPersoon::find_by_sql("SELECT * FROM contactperson ORDER BY ".$_POST["sort"]." ASC LIMIT ".$_POST["start"].", ".$_POST["limit"]);
+        if($_POST["sort"] != null) $result = ContactPersoon::find_by_sql("SELECT * FROM contactperson ORDER BY LOWER(".$_POST["sort"].") ASC LIMIT ".$_POST["start"].", ".$_POST["limit"]);
     }
     foreach ($result as $person) {
         echo "<a href='?user_id={$person->id}'> <div id='whole-card'>";
