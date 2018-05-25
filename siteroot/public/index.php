@@ -210,7 +210,7 @@
                 }
             }
 
-            //echo "<script type=\"text/javascript\">location.href = 'index.php?user_id={$info_edit_user->id}';</script>";
+            echo "<script type=\"text/javascript\">location.href = 'index.php?user_id={$info_edit_user->id}';</script>";
         }
         if(isset($_GET['edit_user']))
         {

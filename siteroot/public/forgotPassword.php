@@ -10,8 +10,8 @@ require_once("../includes/initialize.php");
 			$str = "1234567890qwertyuiopasdfghjklzxcvbnm";
 			$str = str_shuffle($str);
 			$str = substr($str, 0, 10);
-			$url = "http://173.249.26.226/adresboek-php/siteroot/public/resetPassword.php?token=$str&email=$email";
-			
+			$url = "http://localhost/adresboek-php/siteroot/public/resetPassword.php?token=$str&email=$email";
+
 			require_once 'phpmailer/src/PHPMailer.php';
   			require_once("phpmailer/src/SMTP.php");
 
@@ -28,10 +28,10 @@ require_once("../includes/initialize.php");
 			$mail->isHTML(true);
 			$mail->Body = "<a href='$url'>Verander uw wachtwoord hier</a>";
 			$mail->setFrom('addressbook57@gmail.com', 'addressbook');
-			
+
 			//sending email to
 			$mail->addAddress($email);
-			
+
 			// send an email
 			if ($mail->send()) {
 				echo "mail is sent";
