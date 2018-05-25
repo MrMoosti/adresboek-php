@@ -5,7 +5,7 @@ if(isset($_POST["limit"], $_POST["start"]))
     $sort = "";
     if($_POST["sort"] == 'id'){
         $sort = "CAST(id AS int)";
-    }else $sort = "LOWER("+$_POST["sort"]+")";
+    }else $sort = "LOWER({$_POST["sort"]})";
     //ORDER BY
     if ($_POST['search'] != null) {
         $searchq = preg_replace("#[^0-9a-z]#i", "", strtolower($_POST['search']));
