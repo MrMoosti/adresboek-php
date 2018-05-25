@@ -76,9 +76,9 @@ function datetime_to_text($datetime="")
     return strftime("%B %d, %Y at %I:%M %p", $unixdatetime);
 }
 
-function upload_image($filename="")
+function upload_image($filename="", $dir="")
 {
-    $target_dir = "images/profile_pictures/";
+    $target_dir = $dir;
     $path = $_FILES['fileToUpload']['name'];
     $ext = pathinfo($path, PATHINFO_EXTENSION);
     $target_file = $target_dir . $filename . "." . $ext;
@@ -148,9 +148,9 @@ function delete_image($file="")
     return $file . $ext;
 }
 
-function getFileSize($userid="")
+function getFileSize($userid="", $dir="")
 {
-    return filesize( "images/profile_pictures/". $userid . "." . pathinfo($_FILES['fileToUpload']['name'], PATHINFO_EXTENSION));
+    return filesize( $dir. $userid . "." . pathinfo($_FILES['fileToUpload']['name'], PATHINFO_EXTENSION));
 }
 
 function getFileType($target_file="")

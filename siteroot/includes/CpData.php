@@ -18,13 +18,23 @@ if(isset($_POST["limit"], $_POST["start"]))
         if($_POST["sort"] != null) $result = ContactPersoon::find_by_sql("SELECT * FROM contactperson ORDER BY ".$_POST["sort"]." ASC LIMIT ".$_POST["start"].", ".$_POST["limit"]);
     }
     foreach ($result as $person) {
+        echo "<a href='?user_id={$person->id}'> <div id='whole-card'>";
         echo "<div class=\"section\">";
-        echo "<img src=\"{$person->img_filename}\" />";
+
+        if($person->img_filename == "" || $person->img_filename == NULL)
+        {
+          echo "<img src='images/profile_pictures/Contactpersonen/default.jpg'/>";
+        }
+        else
+        {
+          echo "<img src=\"{$person->img_filename}\" />";
+        }
+
         echo "<p>{$person->first_name}, {$person->last_name}</p>";
         echo "<p>{$person->work_location}</p>";
         echo "<p class=\"sectionCompany\">{$person->business_name}</p>";
-        echo "</div>";
-        echo "<hr>";
+        echo "</div><hr />";
+        echo "</div></a>";
     }
     if (empty($result)) {
         echo "No results";

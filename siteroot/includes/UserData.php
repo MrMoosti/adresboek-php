@@ -17,7 +17,14 @@ if(isset($_POST["limit"], $_POST["start"]))
     foreach ($result as $person) {
         echo "<a href='?user_id={$person->id}'> <div id='whole-card'>";
         echo "<div class='section'>";
-        echo "<img src=\"{$person->img_filename}\" />";
+        if($person->img_filename == "" || $person->img_filename == NULL)
+        {
+          echo "<img src='images/profile_pictures/Users/default.jpg'/>";
+        }
+        else
+        {
+          echo "<img src=\"{$person->img_filename}\" />";
+        }
         echo "<p>{$person->first_name}, {$person->insertion} {$person->last_name}</p>";
         echo "<p>ID: {$person->id}</p>";
         if($person->admin == 0)

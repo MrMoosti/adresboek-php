@@ -103,9 +103,88 @@
     </div>
 
     <div class="listNames">
-        <div id="load_data"></div>
+        <div id="load_data">
+            <script type="text/javascript"></script>
+        </div>
         <div id="load_data_message"></div>
-        <script src="js/ContactPersonList.js"></script>
+        <script>
+            function findGET() {
+                var result = null,
+                    tmp = [];
+                location.search
+                    .substr(1)
+                    .split("&")
+                    .forEach(function (item) {
+                        tmp = item.split("=");
+                        if (tmp[0] === "voornaam") result = decodeURIComponent(tmp[1]);
+                    });
+                return result;
+            }
+            $(document).ready(function () {
+                            test();
+                function test() {
+                    for (var i = 0; i < 50; i++) {
+                            console.log(findGET());
+
+                    }
+                }
+                var limit = 20;
+                var start = 0;
+                var action = 'inactive';
+                function load_data(limit, start, search) {
+                    $.ajax({
+                        url: "CpData.php",
+                        method: "POST",
+                        data: { limit: limit, start: start, search: search },
+                        cache: false,
+                        success: function (data) {
+                            $('#load_data').append(data);
+                            if (data == '') {
+                                $('#load_data_message').html("<button type='button' class='btn btn-info'>No Data Found</button>");
+                                action = 'active';
+                            } else {
+                                if (findGET() == null || findGET() == "") {
+                                    $('#load_data_message').html("<div id='loadingGif'><img src='images/loading.gif'/></div>");
+                                    action = "inactive";
+                                } else {
+                                    action = "active";
+                                    window.history.pushState("object or string", "Title", "/adresboek-php/siteroot/public/");
+                                }
+                            }
+                            if (data == "No results"){
+                                action = "inactive";
+                                $('#load_data_message').html("<div id='loadingGif'><img src=''/></div>");
+                            }
+                        }
+                    });
+                }
+                if (action == 'inactive' && findGET() == null) {
+                    action = 'active';
+                    load_data(limit, start, null);
+                } else {
+                    action = 'active';
+                    load_data(limit, start, findGET());
+                }
+                $(".listNames").scroll(function () {
+                    if ($(".listNames").scrollTop() + $(".listNames").height() > $("#load_data").height() && action == 'inactive') {
+                        if (findGET() == null) {
+                            action = 'active';
+                            start = start + limit;
+                            setTimeout(function () {
+                                load_data(limit, start, null);
+                            }, 1000);
+                        } else {
+                            action = 'active';
+                            start = start + 50;
+                            setTimeout(function () {
+                                load_data(50, start, findGET());
+                            }, 650);
+                        }
+                    }
+                });
+                            test();
+            });
+        </script>
     </div>
 </section>
 <section id="detail">
@@ -219,11 +298,11 @@ if(!isset($_GET['adduser']))
                 <input type=\"text\" placeholder=\"Tussenvoegsel\" name=\"insertion\">
                 <input type=\"text\" required placeholder=\"Achternaam\" name=\"lastname\">
                 <input type=\"email\" required placeholder=\"Email\" name=\"email\">
-                
+
                 <input type=\"text\" required placeholder=\"Telefoon prive\" name=\"telephone_private\">
                 <input type=\"text\" required placeholder=\"Telefoon werk\" name=\"telephone_work\">
                 <input type=\"text\" required placeholder=\"Werkplek\" name=\"work_location\">
-                
+
                 <input type=\"text\" required placeholder=\"Bedrijfs naam\" name=\"business_name\">
                 <input type=\"password\" required placeholder=\"Wachtwoord\" name=\"password\">
                 <br>
