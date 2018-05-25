@@ -10,7 +10,7 @@ defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR);
 
 //C:\xampp\htdocs\adresboek-php\siteroot
 defined('SITE_ROOT') ? null:
-    define('SITE_ROOT', 'C:' .DS. 'xampp7' .DS. 'htdocs' .DS. 'adresboek-php' .DS. 'siteroot');
+    define('SITE_ROOT', 'C:' .DS. 'xampp' .DS. 'htdocs' .DS. 'adresboek-php' .DS. 'siteroot');
 
 defined('LIB_PATH') ? null : define('LIB_PATH', SITE_ROOT.DS.'includes');
 
