@@ -2,7 +2,7 @@ $(document).ready(function () {
     var limit = 20;
     var start = 0;
     var action = 'inactive';
-    var sort = 'first_name';
+    var sort = 'id';
     function findSearch() {
         var result = null,
             tmp = [];
@@ -21,7 +21,7 @@ $(document).ready(function () {
         limit = 20;
         $.ajax({
             type: "POST",
-            url: "../includes/CpData.php",
+            url: "../includes/UserData.php",
             data: { limit: limit, start: start, search: null, sort: x }
         }).done(function (data) {
             sort = x;
@@ -29,21 +29,18 @@ $(document).ready(function () {
             $('#load_data').append(data);
         });
     }
+    $('#sortId').click(function () {
+        sortF('id');
+    });
     $('#sortVoornaam').click(function () {
         sortF('first_name');
     });
     $('#sortAchternaam').click(function () {
         sortF('last_name');
     });
-    $('#workLocation').click(function () {
-        sortF('work_location');
-    });
-    $('#businessName').click(function () {
-        sortF('business_name');
-    });
     function load_data(limit, start, search) {
         $.ajax({
-            url: "../includes/CpData.php",
+            url: "../includes/UserData.php",
             method: "POST",
             data: { limit: limit, start: start, search: search, sort: sort },
             cache: false,

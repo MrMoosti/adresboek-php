@@ -51,7 +51,7 @@ if(!$session->is_admin()) {
 <section id="content">
     <div class="search">
         <form class="searchForm" method="get" id="searchForm">
-            <input type="text" name="voornaam" placeholder="Zoeken"/>
+            <input type="text" name="search" placeholder="Zoeken"/>
             <a href="#" onclick="document.getElementById('searchForm').submit()" rel="search">
                 <i class="fa fa-search"></i>
             </a>
@@ -60,28 +60,28 @@ if(!$session->is_admin()) {
     <div class="sortNames">
         <ul type="none">
             <li class="voornaam-sorteren">
-                <a href="#">
-                    voornaam
-                    <i class="fa fa-caret-down"></i>
-                </a>
+                <form id="sortId">
+                    <a href="#">
+                        Id
+                        <i class="fa fa-caret-down"></i>
+                    </a>
+                </form>
             </li>
             <li class="achternaam-sorteren">
-                <a href="#">
-                    achternaam
-                    <i class="fa fa-caret-down"></i>
-                </a>
+                <form id="sortVoornaam">
+                    <a href="#">
+                        voornaam
+                        <i class="fa fa-caret-down"></i>
+                    </a>
+                </form>
             </li>
             <li class="plaats-sorteren">
-                <a href="#">
-                    plaats
-                    <i class="fa fa-caret-down"></i>
-                </a>
-            </li>
-            <li class="bedrijfsnaam-sorteren">
-                <a href="#">
-                    bedrijfsnaam
-                    <i class="fa fa-caret-down"></i>
-                </a>
+                <form id="sortAchternaam">
+                    <a href="#">
+                        achternaam
+                        <i class="fa fa-caret-down"></i>
+                    </a>
+                </form>
             </li>
         </ul>
     </div>
@@ -91,88 +91,12 @@ if(!$session->is_admin()) {
     </div>
 
     <div class="listNames">
-        <?php
-        if (isset($_GET['voornaam'])) {
-            $searchResult = $_GET['voornaam'];
-            $result = User::search($searchResult, "user");
-        }
-        else {
-            $result = User::find_all();
-        }
-        foreach ($result as $person) {
-            echo "<a href='?user_id={$person->id}'> <div id='whole-card'>";
-            echo "<div class='section'>";
-            echo "<img src=\"{$person->img_filename}\" />";
-            echo "<p>{$person->first_name}, {$person->insertion} {$person->last_name}</p>";
-            echo "<p>ID: {$person->id}</p>";
-            if($person->admin == 0)
-            {
-                echo "<p class=\"sectionCompany\">Gebruiker</p>";
-            }
-            else if ($person->admin == 1)
-            {
-                echo "<p class=\"sectionCompany\">Admin</p>";
-            }
-            echo "</div><hr />";
-            echo "</div></a>";
-        }
-        if (empty($result)) {
-            echo "Er zijn geen resultaten gevonden";
-        }
-        ?>
+        <div id="load_data"></div>
+        <div id="load_data_message"></div>
+        <script src="js/UserList.js"></script>
     </div>
 
 </section>
-
-<?php
-
-//Simply add new gebruiker
-if(isset($_POST['add']))
-{
-
-    $firstname_post = $_POST['firstname'];
-    $insertion_post = $_POST['insertion'];
-    $lastname_post = $_POST['lastname'];
-    $email_post = $_POST['email'];
-    $telephone_post = $_POST['telephone'];
-    $username_post = $_POST['username'];
-    $password_post = $_POST['password'];
-    $role_post = $_POST['role'];
-
-    if($role_post == "admin")
-    {
-        $role_post = 1;
-    }
-    else
-    {
-        $role_post = 0;
-    }
-
-    $user = new user();
-    $user->first_name = $firstname_post;
-    $user->insertion = $insertion_post;
-    $user->last_name = $lastname_post;
-    $user->email = $email_post;
-    $user->telephone = $telephone_post;
-    $user->username = $username_post;
-    $user->password = $password_post;
-    $user->admin = $role_post;
-    $user->save();
-
-//    $path = $_FILES['fileToUpload']['name'];
-//    $ext = pathinfo($path, PATHINFO_EXTENSION);
-//    $target_file = $target_dir . $filename . "." . $ext;
-
-    $user->img_filename = upload_image($user->id);
-    $user->img_size = getFileSize($user->id);
-    $user->img_type = getFileType("images/profile_pictures/" . $user->id . "." . pathinfo($_FILES['fileToUpload']['name'], PATHINFO_EXTENSION));
-    $user->save();
-
-    echo "<script type=\"text/javascript\">location.href = 'gebruikers.php?user_id={$user->id}';</script>";
-
-}
-?>
-
 <section id="detail">
     <?php
     if(!isset($_GET['adduser']))
@@ -183,7 +107,7 @@ if(isset($_POST['add']))
             $current_user = User::find_by_id($current_user_id);
             if($current_user->img_filename == null || $current_user->img_filename == "")
             {
-                echo "<img src='images/profile_pictures/kim.jpg' alt='profile_pic' >";
+                echo "<img src='images/profile_pictures/Users/default.jpg' alt='profile_pic' >";
             }
             else
             {
@@ -196,7 +120,7 @@ if(isset($_POST['add']))
             $edit_user = User::find_by_id($edit_user_id);
             if($edit_user->img_filename == null || $edit_user->img_filename == "")
             {
-                echo "<img src='images/profile_pictures/kim.jpg' alt='profile_pic' >";
+                echo "<img src='images/profile_pictures/Users/default.jpg' alt='profile_pic' >";
             }
             else
             {
@@ -285,10 +209,16 @@ if(isset($_POST['add']))
             $info_edit_user->admin = $role_post;
             $info_edit_user->save();
 
-            $info_edit_user->img_filename = upload_image($info_edit_user->id);
-            $info_edit_user->img_size = getFileSize($info_edit_user->id);
-            $info_edit_user->img_type = getFileType("images/profile_pictures/" . $info_edit_user->id . "." . pathinfo($_FILES['fileToUpload']['name'], PATHINFO_EXTENSION));
-            $info_edit_user->save();
+            if ($_FILES['fileToUpload'])
+            {
+                if(!empty($_FILES['fileToUpload']['name']))
+                {
+                    $info_edit_user->img_filename = upload_image($info_edit_user->id, "images/profile_pictures/Users/");
+                    $info_edit_user->img_size = getFileSize($info_edit_user->id, "images/profile_pictures/Users/");
+                    $info_edit_user->img_type = getFileType("images/profile_pictures/Users/" . $info_edit_user->id . "." . pathinfo($_FILES['fileToUpload']['name'], PATHINFO_EXTENSION));
+                    $info_edit_user->save();
+                }
+            }
 
             echo "<script type=\"text/javascript\">location.href = 'gebruikers.php?user_id={$info_edit_user->id}';</script>";
         }
@@ -353,7 +283,7 @@ if(isset($_POST['add']))
         {
             $remove_user_id = $_GET['remove_user'];
             $remove_user = User::find_by_id($remove_user_id);
-            echo delete_image("images/profile_pictures/" . $remove_user->id);
+            echo delete_image("images/profile_pictures/Users/" . $remove_user->id);
 
 
             $remove_user->delete();
@@ -372,5 +302,56 @@ if(isset($_POST['add']))
         ?>
     </div>
 </section>
+
+<?php
+
+//Simply add new gebruiker
+if(isset($_POST['add']))
+{
+
+    $firstname_post = $_POST['firstname'];
+    $insertion_post = $_POST['insertion'];
+    $lastname_post = $_POST['lastname'];
+    $email_post = $_POST['email'];
+    $telephone_post = $_POST['telephone'];
+    $username_post = $_POST['username'];
+    $password_post = $_POST['password'];
+    $role_post = $_POST['role'];
+
+    if($role_post == "admin")
+    {
+        $role_post = 1;
+    }
+    else
+    {
+        $role_post = 0;
+    }
+
+    $user = new user();
+    $user->first_name = $firstname_post;
+    $user->insertion = $insertion_post;
+    $user->last_name = $lastname_post;
+    $user->email = $email_post;
+    $user->telephone = $telephone_post;
+    $user->username = $username_post;
+    $user->password = $password_post;
+    $user->admin = $role_post;
+    $user->save();
+
+    if ($_FILES['fileToUpload'])
+    {
+        if(!empty($_FILES['fileToUpload']['name']))
+        {
+          $user->img_filename = upload_image($user->id, "images/profile_pictures/Users/");
+          $user->img_size = getFileSize($user->id, "images/profile_pictures/Users/");
+          $user->img_type = getFileType("images/profile_pictures/Users/" . $user->id . "." . pathinfo($_FILES['fileToUpload']['name'], PATHINFO_EXTENSION));
+          $user->save();
+        }
+    }
+
+    echo "<script type=\"text/javascript\">location.href = 'gebruikers.php?user_id={$user->id}';</script>";
+
+}
+?>
 
 <?php include 'layouts/index_footer.php';?>
