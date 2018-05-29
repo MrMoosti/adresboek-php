@@ -1,4 +1,5 @@
 <?php
+include 'layouts/index_header.php';
 require_once("../includes/initialize.php");
 ob_start();
 include ('layouts/mail_template.php');
@@ -63,11 +64,19 @@ $body_html = ob_get_clean();
 <html>
 <head>
 	<title></title>
+    <link rel="stylesheet" href="stylesheets/stylesheet.css" type="text/css">
 </head>
 <body>
-	<form action="forgotPassword.php" method="post">
-		<input type="text" name="email" placeholder="email"> <br>
-		<input type="submit" name="forgotPass" value="Request Password">
-	</form>
+<div id="main">
+    <h1><span><strong class="bigFont">W</strong></span>achtwoord<span class="bigFont"><strong>V</strong></span>ergeten
+    </h1>
+    <form action="forgotPassword.php" method="post">
+
+        <input type="text" name="email" placeholder="example@example.com" value=""><br>
+        <br>
+        <input class="button" type="submit" name="forgotPass" value="Request password">
+
+    </form>
 </body>
 </html>
+<?php include 'layouts/index_footer.php';?>
