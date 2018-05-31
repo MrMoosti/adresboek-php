@@ -30,7 +30,7 @@ if(isset($_POST["limit"], $_POST["start"]))
           echo "<img src=\"{$person->img_filename}\" />";
         }
 
-        echo "<p>{$person->first_name}, {$person->last_name}</p>";
+        echo "<p>{$person->first_name}, {$person->insertion} {$person->last_name}</p>";
         echo "<p>{$person->work_location}</p>";
         echo "<p class=\"sectionCompany\">{$person->business_name}</p>";
         echo "</div><hr />";
