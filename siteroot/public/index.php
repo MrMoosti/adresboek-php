@@ -116,7 +116,7 @@
         {
             $current_user_id = $_GET['user_id'];
             $current_user = Contactpersoon::find_by_id($current_user_id);
-            if($current_user->img_filename == null || $current_user->img_filename == "" || $current_user->img_size == 0 || $current_user->img_type == "")
+            if($current_user->img_filename == null || $current_user->img_filename == "")
             {
                 echo "<img src='images/profile_pictures/Contactpersonen/default.jpg' alt='profile_pic' >";
             }
