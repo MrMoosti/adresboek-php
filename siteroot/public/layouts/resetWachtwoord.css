@@ -1,0 +1,132 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font: 1em 'Roboto', sans-serif;
+}
+
+#container {
+    width: 100%;
+    height: 735px;
+    background-color: white;
+}
+
+#header {
+    width: 100%;
+    background-color: #2960aa;
+    height: 70px;
+    color: whitesmoke;
+    margin: 0;
+    padding-top: 30px;
+    padding-left: 40px;
+    font-size: xx-large;
+
+}
+
+
+.OnlineAdresboek {
+    margin: 0;
+    padding: 0;
+
+}
+
+.NieuwWachtwoord {
+    text-align: center;
+
+}
+
+.bevestig {
+    text-align: center;
+
+}
+
+#main {
+    padding-top: 120px;
+    background-color: white;
+    width: 100%;
+    height: 500px;
+    align-content: center;
+    text-align: center;
+
+}
+
+.bigFont {
+    font-size: 70px;
+
+}
+
+p {
+
+    font-weight: 100;
+    font-size: 60px;
+    margin-bottom: 45px;
+}
+
+.fat {
+    font-size: 50px;
+
+}
+
+input{
+    height: 20px;
+    border: solid 1px grey;
+
+}
+
+.button {
+    background-color: #2960aa;
+    font-size: 16px;
+    width: 290px;
+    color: white;
+    border: none;
+    height: 27px;
+    font-weight: 300;
+
+}
+button {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+#footer {
+    float: left;
+    text-align: center;
+    width: 100%;
+    height: 135px;
+    background-color: white;
+
+}
+#footer p {
+
+    font-size: 25px;
+    margin: 0;
+    padding-top: 45px;
+}
+
+.password {
+    color: deepskyblue;
+    width: 50px;
+}
+
+a:hover {
+    color: purple;
+}
+
+
+/* media queries */
+
+
+@media screen and (max-width: 600px){
+    .OnlineAdresboek {
+        margin-top: 13px;
+        text-align: left;
+        font-size: 50px;
+    }
+}
+
+@media screen and (max-width: 500px){
+    .OnlineAdresboek {
+        display: none;
+
+    }
+}
