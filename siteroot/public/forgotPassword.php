@@ -65,6 +65,7 @@ $body_html = ob_get_clean();
 <head>
 	<title></title>
     <link rel="stylesheet" href="stylesheets/stylesheet.css" type="text/css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 </head>
 <body>
 <div id="main">
