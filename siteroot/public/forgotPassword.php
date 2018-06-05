@@ -46,6 +46,7 @@ $body_html = ob_get_clean();
 			// send an email
 			if ($mail->send()) {
 				$msg = "mail is sent";
+				redirect_to("index.php");
 			}
 			else {
 				echo "something wrong happend";
