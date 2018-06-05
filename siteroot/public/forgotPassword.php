@@ -82,6 +82,7 @@ $body_html = ob_get_clean();
        		}
        	?>
     </form>
+    <button onclick="history.go(-1);">Back </button>
 </body>
 </html>
 <?php include 'layouts/index_footer.php';?>
