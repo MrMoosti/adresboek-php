@@ -1,3 +1,10 @@
+<?php
+$error = "";
+
+require_once("../includes/initialize.php");
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,15 +23,16 @@
         <form action="" method="post">
           <h2><span><strong class="bigFont">N</strong></span>ieuw<span class="bigFont"><strong>W</strong></span>achtwoord
           </h2>
-            <input type="password" name="Password">
+            <input required type="password" name="Password_1">
             <br>
             <h2><span><strong class="bigFont">B</strong></span>evestig<span class="bigFont"><strong>W</strong></span>achtwoord
             </h2>
-            <input type="password" name="Password"><br>
+            <input required type="password" name="Password_2"><br>
             <br>
-            <button class="button" type="submit">Reset Wachtwoord</button>
+            <button class="button" type="submit">Wachtwoord veranderen</button>
         </form>
     </div>
+		<?php echo output_message($error); ?>
 
 </div>
 
@@ -32,27 +40,30 @@
 </html>
 
 <?php
-require_once("../includes/initialize.php");
-if (isset($_GET['email']) && isset($_GET['token']) && isset($_POST['submit'])) {
+
+if (isset($_GET['email']) && isset($_GET['token']) && isset($_POST['Password_1']) && isset($_POST['Password_2']))
+{
 	$email = $db->escape_value($_GET['email']);
 	$token = $db->escape_value($_GET['token']);
+	$password_1 = $db->escape_value($_POST['Password_1']);
+	$password_2 = $db->escape_value($_POST['Password_2']);
 
-	$sql = "SELECT id FROM user WHERE email='$email' AND token='$token'";
-	$result = $db->query($sql);
-	if ($db->num_rows($result) > 0) {
-		$password = $db->escape_value($_POST['']);
+	if($password_1 == $password_2)
+	{
+		$sql = "SELECT id FROM user WHERE email='$email' AND token='$token'";
+		$result = $db->query($sql);
+		if ($db->num_rows($result) > 0) {
 
-		$sql = "UPDATE user SET password='$password' WHERE email='$email'";
-		$db->query($sql);
-		echo "your new password $password";
+			$sql = "UPDATE user SET password='$password_1' WHERE email='$email'";
+			$db->query($sql);
+			redirect_to('index.php');
+			$error = "Je wachtwoord is veranderd. ($password_1)";
 	}
-	else {
-		echo "Please check your link";
+	else
+	{
+		$error = "Wachtwoorden zijn niet hetzelfde.";
 	}
 }
-else {
-	header("Location: login.php");
-	exit();
 }
 
 ?>
