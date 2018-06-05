@@ -21,7 +21,7 @@ $body_html = ob_get_clean();
 
 			$mail = new PHPMailer\PHPMailer\PHPMailer();
 			$mail->isSMTP();
-			$mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
+			//$mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
 			$mail->Host = "smtp.gmail.com";
 			$mail->SMTPAuth = true; //true
 			$mail->Username = "addressbook57@gmail.com";
@@ -45,7 +45,7 @@ $body_html = ob_get_clean();
 
 			// send an email
 			if ($mail->send()) {
-				echo "mail is sent";
+				$msg = "mail is sent";
 			}
 			else {
 				echo "something wrong happend";
@@ -56,7 +56,7 @@ $body_html = ob_get_clean();
 			$db->query($sql);
 		}
 		else {
-			echo "ERROR";
+			$msg = "Your input is wrong";
 		}
 	}
 ?>
@@ -75,7 +75,11 @@ $body_html = ob_get_clean();
         <input type="text" name="email" placeholder="example@example.com" value=""><br>
         <br>
         <input class="button" type="submit" name="forgotPass" value="Request password">
-
+        <?php
+       		if (isset($msg)) {
+       			echo "<br><br>" . $msg;
+       		}
+       	?>
     </form>
 </body>
 </html>
